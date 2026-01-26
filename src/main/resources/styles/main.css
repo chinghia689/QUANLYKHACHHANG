@@ -1,0 +1,295 @@
+/* Modern Customer Management Application Styles */
+
+/* Root Variables */
+.root {
+    -fx-font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    -fx-font-size: 14px;
+    
+    /* Color Palette */
+    -fx-primary: #8B5CF6;
+    -fx-primary-dark: #7C3AED;
+    -fx-secondary: #3B82F6;
+    -fx-accent: #EC4899;
+    -fx-success: #10B981;
+    -fx-danger: #EF4444;
+    -fx-warning: #F59E0B;
+    
+    /* Background Colors */
+    -fx-bg-primary: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+    -fx-bg-secondary: #1e293b;
+    -fx-bg-tertiary: #334155;
+    -fx-bg-hover: #475569;
+    
+    /* Text Colors */
+    -fx-text-primary: #F1F5F9;
+    -fx-text-secondary: #CBD5E1;
+    -fx-text-muted: #94A3B8;
+}
+
+/* Main Application Background */
+.root {
+    -fx-background-color: -fx-bg-primary;
+}
+
+/* ========== TOOLBAR STYLES ========== */
+.toolbar {
+    -fx-background-color: rgba(30, 41, 59, 0.8);
+    -fx-padding: 15px 20px;
+    -fx-spacing: 15px;
+    -fx-border-color: rgba(139, 92, 246, 0.3);
+    -fx-border-width: 0 0 2px 0;
+    -fx-background-radius: 0;
+}
+
+/* ========== TEXT FIELD STYLES ========== */
+.text-field {
+    -fx-background-color: rgba(51, 65, 85, 0.6);
+    -fx-text-fill: -fx-text-primary;
+    -fx-prompt-text-fill: -fx-text-muted;
+    -fx-border-color: rgba(139, 92, 246, 0.3);
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 10px 15px;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+}
+
+.text-field:focused {
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.4), 10, 0, 0, 0);
+}
+
+/* ========== COMBO BOX STYLES ========== */
+.combo-box {
+    -fx-background-color: rgba(51, 65, 85, 0.6);
+    -fx-border-color: rgba(139, 92, 246, 0.3);
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-primary;
+    -fx-padding: 8px 12px;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: -fx-bg-secondary;
+    -fx-border-color: -fx-primary;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0, 0, 5);
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: -fx-bg-hover;
+}
+
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+}
+
+/* ========== BUTTON STYLES ========== */
+.button {
+    -fx-background-color: linear-gradient(135deg, -fx-primary 0%, -fx-primary-dark 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 12px 24px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.3), 10, 0, 0, 4);
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(135deg, -fx-primary-dark 0%, -fx-primary 100%);
+    -fx-scale-y: 1.05;
+    -fx-scale-x: 1.05;
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.5), 15, 0, 0, 6);
+}
+
+.button:pressed {
+    -fx-scale-y: 0.98;
+    -fx-scale-x: 0.98;
+}
+
+/* Button Variants */
+.button.success-button {
+    -fx-background-color: linear-gradient(135deg, -fx-success 0%, #059669 100%);
+    -fx-effect: dropshadow(gaussian, rgba(16, 185, 129, 0.3), 10, 0, 0, 4);
+}
+
+.button.success-button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(16, 185, 129, 0.5), 15, 0, 0, 6);
+}
+
+.button.danger-button {
+    -fx-background-color: linear-gradient(135deg, -fx-danger 0%, #DC2626 100%);
+    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.3), 10, 0, 0, 4);
+}
+
+.button.danger-button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.5), 15, 0, 0, 6);
+}
+
+.button.secondary-button {
+    -fx-background-color: linear-gradient(135deg, -fx-bg-tertiary 0%, -fx-bg-secondary 100%);
+}
+
+.button.secondary-button:hover {
+    -fx-background-color: linear-gradient(135deg, -fx-bg-hover 0%, -fx-bg-tertiary 100%);
+}
+
+/* ========== TABLE VIEW STYLES ========== */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(139, 92, 246, 0.2);
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-padding: 0;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, rgba(51, 65, 85, 0.9), rgba(30, 41, 59, 0.9));
+    -fx-border-color: transparent transparent rgba(139, 92, 246, 0.5) transparent;
+    -fx-border-width: 0 0 2px 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -fx-text-primary;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 12px 10px;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: -fx-text-secondary;
+    -fx-padding: 10px 10px;
+    -fx-border-color: transparent;
+}
+
+.table-row-cell {
+    -fx-background-color: rgba(30, 41, 59, 0.4);
+    -fx-border-color: transparent;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: rgba(51, 65, 85, 0.3);
+}
+
+.table-row-cell:hover {
+    -fx-background-color: rgba(139, 92, 246, 0.2);
+    -fx-cursor: hand;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: linear-gradient(to right, rgba(139, 92, 246, 0.4), rgba(59, 130, 246, 0.4));
+    -fx-text-fill: white;
+}
+
+.table-row-cell:selected .table-cell {
+    -fx-text-fill: white;
+}
+
+/* ========== LABEL STYLES ========== */
+.label {
+    -fx-text-fill: -fx-text-primary;
+}
+
+.label.header-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.5), 10, 0, 0, 2);
+}
+
+.label.section-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-primary;
+}
+
+/* ========== DIALOG STYLES ========== */
+.dialog-pane {
+    -fx-background-color: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 2px;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 30, 0, 0, 10);
+}
+
+.dialog-pane .label {
+    -fx-text-fill: -fx-text-primary;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: rgba(139, 92, 246, 0.2);
+    -fx-border-radius: 15px 15px 0 0;
+    -fx-background-radius: 15px 15px 0 0;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* ========== DATE PICKER STYLES ========== */
+.date-picker {
+    -fx-background-color: rgba(51, 65, 85, 0.6);
+    -fx-border-color: rgba(139, 92, 246, 0.3);
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.date-picker .text-field {
+    -fx-border-radius: 8px 0 0 8px;
+    -fx-background-radius: 8px 0 0 8px;
+}
+
+.date-picker-popup {
+    -fx-background-color: -fx-bg-secondary;
+    -fx-border-color: -fx-primary;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 20, 0, 0, 8);
+}
+
+/* ========== SCROLL BAR STYLES ========== */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: rgba(139, 92, 246, 0.5);
+    -fx-background-radius: 5px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: rgba(139, 92, 246, 0.7);
+}
+
+.scroll-bar .track {
+    -fx-background-color: rgba(51, 65, 85, 0.3);
+    -fx-background-radius: 5px;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeIn {
+    from { -fx-opacity: 0; }
+    to { -fx-opacity: 1; }
+}
+
+.fade-in {
+    -fx-opacity: 0;
+    -fx-animation: fadeIn 0.3s ease-in;
+}

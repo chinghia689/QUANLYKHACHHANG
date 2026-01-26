@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.customer.controller.MainController"
+            prefHeight="700.0" prefWidth="1200.0"
+            styleClass="root">
+
+    <!-- Top Toolbar -->
+    <top>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="10" left="20"/>
+            </padding>
+            
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT">
+                <Label text="🏢 Quản Lý Khách Hàng" styleClass="header-label"/>
+            </HBox>
+            
+            <!-- Search and Filter Bar -->
+            <HBox spacing="15" alignment="CENTER_LEFT" styleClass="toolbar">
+                <Label text="Tìm kiếm:" styleClass="section-label"/>
+                <TextField fx:id="searchField" promptText="Tìm theo tên, SĐT, email..." 
+                          prefWidth="350" HBox.hgrow="ALWAYS"/>
+                
+                <Label text="Lọc:" styleClass="section-label"/>
+                <ComboBox fx:id="filterComboBox" prefWidth="180"/>
+                
+                <Region HBox.hgrow="ALWAYS"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- Center Table -->
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+            
+            <TableView fx:id="customerTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="nameColumn" text="Họ Tên" prefWidth="200"/>
+                    <TableColumn fx:id="phoneColumn" text="Số Điện Thoại" prefWidth="130"/>
+                    <TableColumn fx:id="emailColumn" text="Email" prefWidth="200"/>
+                    <TableColumn fx:id="addressColumn" text="Địa Chỉ" prefWidth="250"/>
+                    <TableColumn fx:id="typeColumn" text="Loại KH" prefWidth="120"/>
+                    <TableColumn fx:id="dobColumn" text="Ngày Sinh" prefWidth="120"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+        </VBox>
+    </center>
+
+    <!-- Bottom Button Bar -->
+    <bottom>
+        <HBox spacing="15" alignment="CENTER" styleClass="toolbar">
+            <padding>
+                <Insets top="15" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <Button fx:id="addButton" text="➕ Thêm Mới" onAction="#handleAdd" 
+                    styleClass="success-button" prefWidth="150"/>
+            <Button fx:id="editButton" text="✏️  Sửa" onAction="#handleEdit" 
+                    prefWidth="130"/>
+            <Button fx:id="deleteButton" text="🗑️  Xóa" onAction="#handleDelete" 
+                    styleClass="danger-button" prefWidth="130"/>
+            <Button fx:id="refreshButton" text="🔄 Làm Mới" onAction="#handleRefresh" 
+                    styleClass="secondary-button" prefWidth="130"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

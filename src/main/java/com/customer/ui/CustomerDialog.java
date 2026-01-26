@@ -1,0 +1,139 @@
+package com.customer.ui;
+
+import com.customer.model.Customer;
+import com.customer.model.CustomerType;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+
+public class CustomerDialog extends Dialog<Customer> {
+    private final TextField nameField;
+    private final TextField phoneField;
+    private final TextField emailField;
+    private final TextArea addressArea;
+    private final DatePicker dobPicker;
+    private final ComboBox<CustomerType> typeComboBox;
+    private final Customer customer;
+
+    public CustomerDialog(Customer customer, boolean isEdit) {
+        this.customer = customer;
+
+        setTitle(isEdit ? "Sửa Khách Hàng" : "Thêm Khách Hàng Mới");
+        setHeaderText(isEdit ? "Cập nhật thông tin khách hàng" : "Nhập thông tin khách hàng mới");
+
+        // Create form fields
+        nameField = new TextField(customer.getFullName());
+        nameField.setPromptText("Nhập họ tên");
+
+        phoneField = new TextField(customer.getPhone());
+        phoneField.setPromptText("Nhập số điện thoại");
+
+        emailField = new TextField(customer.getEmail());
+        emailField.setPromptText("Nhập email");
+
+        addressArea = new TextArea(customer.getAddress());
+        addressArea.setPromptText("Nhập địa chỉ");
+        addressArea.setPrefRowCount(3);
+
+        dobPicker = new DatePicker(customer.getDateOfBirth());
+        dobPicker.setPromptText("Chọn ngày sinh");
+
+        typeComboBox = new ComboBox<>();
+        typeComboBox.getItems().addAll(CustomerType.values());
+        typeComboBox.setValue(customer.getCustomerType() != null ? customer.getCustomerType() : CustomerType.REGULAR);
+
+        // Custom cell factory for type combo box
+        typeComboBox.setButtonCell(new ListCell<CustomerType>() {
+            @Override
+            protected void updateItem(CustomerType item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getDisplayName());
+                }
+            }
+        });
+
+        typeComboBox.setCellFactory(lv -> new ListCell<CustomerType>() {
+            @Override
+            protected void updateItem(CustomerType item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getDisplayName());
+                }
+            }
+        });
+
+        // Create grid layout
+        GridPane grid = new GridPane();
+        grid.setHgap(15);
+        grid.setVgap(12);
+        grid.setPadding(new Insets(20));
+
+        // Add labels and fields
+        grid.add(new Label("Họ tên: *"), 0, 0);
+        grid.add(nameField, 1, 0);
+
+        grid.add(new Label("Số điện thoại:"), 0, 1);
+        grid.add(phoneField, 1, 1);
+
+        grid.add(new Label("Email:"), 0, 2);
+        grid.add(emailField, 1, 2);
+
+        grid.add(new Label("Địa chỉ:"), 0, 3);
+        grid.add(addressArea, 1, 3);
+
+        grid.add(new Label("Ngày sinh:"), 0, 4);
+        grid.add(dobPicker, 1, 4);
+
+        grid.add(new Label("Loại khách hàng: *"), 0, 5);
+        grid.add(typeComboBox, 1, 5);
+
+        // Set column constraints for better layout
+        nameField.setPrefWidth(300);
+        phoneField.setPrefWidth(300);
+        emailField.setPrefWidth(300);
+        addressArea.setPrefWidth(300);
+        dobPicker.setPrefWidth(300);
+        typeComboBox.setPrefWidth(300);
+
+        // Create container
+        VBox content = new VBox(10);
+        content.getChildren().add(grid);
+
+        getDialogPane().setContent(content);
+
+        // Add buttons
+        ButtonType saveButtonType = new ButtonType("Lưu", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType("Hủy", ButtonBar.ButtonData.CANCEL_CLOSE);
+        getDialogPane().getButtonTypes().addAll(saveButtonType, cancelButtonType);
+
+        // Style buttons
+        Button saveButton = (Button) getDialogPane().lookupButton(saveButtonType);
+        saveButton.getStyleClass().add("success-button");
+
+        Button cancelButton = (Button) getDialogPane().lookupButton(cancelButtonType);
+        cancelButton.getStyleClass().add("secondary-button");
+
+        // Convert result to Customer when Save is clicked
+        setResultConverter(dialogButton -> {
+            if (dialogButton == saveButtonType) {
+                customer.setFullName(nameField.getText());
+                customer.setPhone(phoneField.getText());
+                customer.setEmail(emailField.getText());
+                customer.setAddress(addressArea.getText());
+                customer.setDateOfBirth(dobPicker.getValue());
+                customer.setCustomerType(typeComboBox.getValue());
+                return customer;
+            }
+            return null;
+        });
+
+        // Request focus on name field
+        nameField.requestFocus();
+    }
+}
