@@ -6,8 +6,11 @@ import com.customer.model.CustomerType;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CustomerDAO {
     private final Connection connection;
@@ -160,5 +163,93 @@ public class CustomerDAO {
         LocalDateTime createdDate = LocalDateTime.parse(createdDateString);
 
         return new Customer(id, fullName, phone, email, address, dateOfBirth, customerType, createdDate);
+    }
+
+    // ========== STATISTICS METHODS ==========
+
+    /**
+     * Count total number of customers.
+     */
+    public int countAll() throws SQLException {
+        String sql = "SELECT COUNT(*) as total FROM customers";
+
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Count customers by type.
+     */
+    public int countByType(CustomerType type) throws SQLException {
+        String sql = "SELECT COUNT(*) as total FROM customers WHERE customer_type = ?";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, type.name());
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total");
+                }
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Count new customers added this month.
+     */
+    public int countNewThisMonth() throws SQLException {
+        YearMonth currentMonth = YearMonth.now();
+        LocalDateTime startOfMonth = currentMonth.atDay(1).atStartOfDay();
+        LocalDateTime endOfMonth = currentMonth.atEndOfMonth().atTime(23, 59, 59);
+
+        String sql = "SELECT COUNT(*) as total FROM customers WHERE created_date >= ? AND created_date <= ?";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, startOfMonth.toString());
+            pstmt.setString(2, endOfMonth.toString());
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total");
+                }
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Get distribution of customers by type (for PieChart).
+     */
+    public Map<CustomerType, Integer> getTypeDistribution() throws SQLException {
+        Map<CustomerType, Integer> distribution = new HashMap<>();
+
+        // Initialize all types with 0
+        for (CustomerType type : CustomerType.values()) {
+            distribution.put(type, 0);
+        }
+
+        String sql = "SELECT customer_type, COUNT(*) as count FROM customers GROUP BY customer_type";
+
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                String typeName = rs.getString("customer_type");
+                int count = rs.getInt("count");
+                try {
+                    CustomerType type = CustomerType.valueOf(typeName);
+                    distribution.put(type, count);
+                } catch (IllegalArgumentException e) {
+                    // Skip unknown types
+                }
+            }
+        }
+
+        return distribution;
     }
 }

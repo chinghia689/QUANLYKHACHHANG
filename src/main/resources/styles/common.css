@@ -1,0 +1,380 @@
+/* ========== COMMON STYLES - Shared across all themes ========== */
+
+/* Font Settings */
+.root {
+    -fx-font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    -fx-font-size: 14px;
+
+    /* Accent Colors - same for both themes */
+    -fx-primary: #8B5CF6;
+    -fx-primary-dark: #7C3AED;
+    -fx-secondary: #3B82F6;
+    -fx-accent: #EC4899;
+    -fx-success: #10B981;
+    -fx-danger: #EF4444;
+    -fx-warning: #F59E0B;
+}
+
+/* ========== SIDEBAR STYLES ========== */
+.sidebar {
+    -fx-min-width: 220px;
+    -fx-max-width: 220px;
+    -fx-padding: 0;
+}
+
+.sidebar-header {
+    -fx-padding: 20px 15px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-spacing: 10px;
+}
+
+.sidebar-logo {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-item {
+    -fx-padding: 15px 20px;
+    -fx-cursor: hand;
+    -fx-background-radius: 0;
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+}
+
+.sidebar-item:hover {
+    -fx-background-color: rgba(139, 92, 246, 0.2);
+}
+
+.sidebar-item.selected {
+    -fx-background-color: linear-gradient(to right, rgba(139, 92, 246, 0.4), transparent);
+    -fx-border-color: -fx-primary transparent transparent transparent;
+    -fx-border-width: 0 0 0 4px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-icon {
+    -fx-font-size: 18px;
+    -fx-padding: 0 10px 0 0;
+}
+
+/* ========== STAT CARD STYLES ========== */
+.stat-card {
+    -fx-padding: 20px;
+    -fx-background-radius: 12px;
+    -fx-min-width: 180px;
+    -fx-min-height: 100px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 4);
+}
+
+.stat-card:hover {
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.3), 15, 0, 0, 6);
+}
+
+.stat-card-title {
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+}
+
+.stat-card-value {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+
+.stat-card-icon {
+    -fx-font-size: 28px;
+}
+
+.stat-card.total {
+    -fx-background-color: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+}
+
+.stat-card.vip {
+    -fx-background-color: linear-gradient(135deg, #EC4899 0%, #DB2777 100%);
+}
+
+.stat-card.new {
+    -fx-background-color: linear-gradient(135deg, #10B981 0%, #059669 100%);
+}
+
+.stat-card .stat-card-title,
+.stat-card .stat-card-value,
+.stat-card .stat-card-icon {
+    -fx-text-fill: white;
+}
+
+/* ========== AVATAR CELL STYLES ========== */
+.avatar-cell {
+    -fx-alignment: CENTER;
+}
+
+.avatar {
+    -fx-min-width: 36px;
+    -fx-min-height: 36px;
+    -fx-max-width: 36px;
+    -fx-max-height: 36px;
+    -fx-background-radius: 18px;
+    -fx-background-color: linear-gradient(135deg, -fx-primary 0%, -fx-accent 100%);
+    -fx-alignment: CENTER;
+}
+
+.avatar-text {
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* ========== LOADING OVERLAY ========== */
+.loading-overlay {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-alignment: CENTER;
+}
+
+.loading-spinner {
+    -fx-progress-color: -fx-primary;
+}
+
+/* ========== THEME TOGGLE ========== */
+.theme-toggle {
+    -fx-padding: 8px 15px;
+    -fx-background-radius: 20px;
+    -fx-cursor: hand;
+}
+
+.theme-toggle:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* ========== CONTENT AREA ========== */
+.content-area {
+    -fx-padding: 0;
+}
+
+.page-header {
+    -fx-padding: 25px 30px 20px 30px;
+}
+
+.page-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+.page-content {
+    -fx-padding: 0 30px 30px 30px;
+}
+
+/* ========== CHART STYLES ========== */
+.chart {
+    -fx-padding: 20px;
+    -fx-background-radius: 12px;
+}
+
+.chart-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.chart-pie-label {
+    -fx-font-size: 12px;
+}
+
+/* Chart Legend */
+.chart-legend {
+    -fx-padding: 10px;
+}
+
+.chart-legend-item {
+    -fx-padding: 5px 10px;
+}
+
+/* ========== BUTTON STYLES (Shared) ========== */
+.button {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 12px 24px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-scale-y: 1.05;
+    -fx-scale-x: 1.05;
+}
+
+.button:pressed {
+    -fx-scale-y: 0.98;
+    -fx-scale-x: 0.98;
+}
+
+/* Button Variants */
+.button.primary-button {
+    -fx-background-color: linear-gradient(135deg, -fx-primary 0%, -fx-primary-dark 100%);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.3), 10, 0, 0, 4);
+}
+
+.button.primary-button:hover {
+    -fx-background-color: linear-gradient(135deg, -fx-primary-dark 0%, -fx-primary 100%);
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.5), 15, 0, 0, 6);
+}
+
+.button.success-button {
+    -fx-background-color: linear-gradient(135deg, -fx-success 0%, #059669 100%);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(16, 185, 129, 0.3), 10, 0, 0, 4);
+}
+
+.button.success-button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(16, 185, 129, 0.5), 15, 0, 0, 6);
+}
+
+.button.danger-button {
+    -fx-background-color: linear-gradient(135deg, -fx-danger 0%, #DC2626 100%);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.3), 10, 0, 0, 4);
+}
+
+.button.danger-button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.5), 15, 0, 0, 6);
+}
+
+/* ========== TABLE VIEW STYLES (Shared) ========== */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-padding: 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 12px 10px;
+}
+
+.table-view .table-cell {
+    -fx-padding: 10px 10px;
+    -fx-border-color: transparent;
+}
+
+.table-row-cell:hover {
+    -fx-cursor: hand;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: linear-gradient(to right, rgba(139, 92, 246, 0.4), rgba(59, 130, 246, 0.4));
+}
+
+.table-row-cell:selected .table-cell {
+    -fx-text-fill: white;
+}
+
+/* ========== SCROLL BAR STYLES ========== */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: rgba(139, 92, 246, 0.5);
+    -fx-background-radius: 5px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: rgba(139, 92, 246, 0.7);
+}
+
+.scroll-bar .track {
+    -fx-background-radius: 5px;
+}
+
+/* ========== TEXT FIELD STYLES (Shared) ========== */
+.text-field {
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 10px 15px;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused {
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.4), 10, 0, 0, 0);
+}
+
+/* ========== COMBO BOX STYLES (Shared) ========== */
+.combo-box {
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 8px 12px;
+}
+
+.combo-box-popup .list-view {
+    -fx-border-color: -fx-primary;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0, 0, 5);
+}
+
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+}
+
+/* ========== DATE PICKER STYLES ========== */
+.date-picker {
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.date-picker .text-field {
+    -fx-border-radius: 8px 0 0 8px;
+    -fx-background-radius: 8px 0 0 8px;
+}
+
+.date-picker-popup {
+    -fx-border-color: -fx-primary;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 20, 0, 0, 8);
+}
+
+/* ========== DIALOG STYLES ========== */
+.dialog-pane {
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 2px;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 30, 0, 0, 10);
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: rgba(139, 92, 246, 0.2);
+    -fx-border-radius: 15px 15px 0 0;
+    -fx-background-radius: 15px 15px 0 0;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* ========== TOOLBAR STYLES ========== */
+.toolbar {
+    -fx-padding: 15px 20px;
+    -fx-spacing: 15px;
+    -fx-background-radius: 0;
+}

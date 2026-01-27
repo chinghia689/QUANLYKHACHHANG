@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.customer.controller.AppController"
+            prefHeight="700.0" prefWidth="1200.0"
+            styleClass="root">
+
+    <!-- Left Sidebar -->
+    <left>
+        <VBox styleClass="sidebar" fx:id="sidebar">
+            <!-- Logo/Header -->
+            <HBox styleClass="sidebar-header" alignment="CENTER_LEFT" spacing="10">
+                <Label text="CRM" styleClass="sidebar-logo"/>
+                <VBox alignment="CENTER_LEFT">
+                    <Label text="Quản Lý KH" styleClass="sidebar-logo" style="-fx-font-size: 14px;"/>
+                    <Label text="Customer Management" styleClass="sidebar-subtitle"/>
+                </VBox>
+            </HBox>
+
+            <!-- Navigation Menu -->
+            <VBox spacing="0" VBox.vgrow="ALWAYS">
+                <padding>
+                    <Insets top="15"/>
+                </padding>
+
+                <!-- Dashboard Menu Item -->
+                <HBox fx:id="menuDashboard" styleClass="sidebar-item, selected"
+                      onMouseClicked="#handleMenuDashboard" alignment="CENTER_LEFT">
+                    <Label text="📊" styleClass="sidebar-icon"/>
+                    <Label text="Dashboard"/>
+                </HBox>
+
+                <!-- Customers Menu Item -->
+                <HBox fx:id="menuCustomers" styleClass="sidebar-item"
+                      onMouseClicked="#handleMenuCustomers" alignment="CENTER_LEFT">
+                    <Label text="👥" styleClass="sidebar-icon"/>
+                    <Label text="Khách Hàng"/>
+                </HBox>
+            </VBox>
+
+            <!-- Bottom Section - Theme Toggle -->
+            <VBox alignment="CENTER" spacing="10">
+                <padding>
+                    <Insets bottom="20" top="20"/>
+                </padding>
+
+                <Button fx:id="themeToggleBtn" text="🌙 Dark"
+                        onAction="#handleThemeToggle" styleClass="theme-toggle"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- Main Content Area -->
+    <center>
+        <StackPane fx:id="contentArea" styleClass="content-area">
+            <!-- Content will be loaded here dynamically -->
+        </StackPane>
+    </center>
+
+</BorderPane>

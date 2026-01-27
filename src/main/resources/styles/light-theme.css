@@ -1,0 +1,266 @@
+/* ========== LIGHT THEME ========== */
+
+/* Root Variables - Light Theme Colors */
+.root {
+    /* Background Colors */
+    -fx-bg-primary: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    -fx-bg-secondary: #ffffff;
+    -fx-bg-tertiary: #f1f5f9;
+    -fx-bg-hover: #e2e8f0;
+    -fx-bg-card: rgba(255, 255, 255, 0.95);
+
+    /* Text Colors */
+    -fx-text-primary: #1e293b;
+    -fx-text-secondary: #475569;
+    -fx-text-muted: #94a3b8;
+
+    /* Border Colors */
+    -fx-border-subtle: rgba(139, 92, 246, 0.3);
+}
+
+/* Main Application Background */
+.root {
+    -fx-background-color: -fx-bg-primary;
+}
+
+/* ========== SIDEBAR - Light Theme ========== */
+.sidebar {
+    -fx-background-color: rgba(255, 255, 255, 0.98);
+    -fx-border-color: rgba(139, 92, 246, 0.15);
+    -fx-border-width: 0 1px 0 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 10, 0, 2, 0);
+}
+
+.sidebar-header {
+    -fx-border-color: rgba(139, 92, 246, 0.2);
+    -fx-border-width: 0 0 1px 0;
+}
+
+.sidebar-logo {
+    -fx-text-fill: -fx-primary;
+}
+
+.sidebar-subtitle {
+    -fx-text-fill: -fx-text-muted;
+    -fx-font-size: 11px;
+}
+
+.sidebar-item {
+    -fx-text-fill: -fx-text-secondary;
+    -fx-background-color: transparent;
+}
+
+.sidebar-item:hover {
+    -fx-text-fill: -fx-primary;
+    -fx-background-color: rgba(139, 92, 246, 0.08);
+}
+
+.sidebar-item.selected {
+    -fx-text-fill: -fx-primary;
+    -fx-background-color: rgba(139, 92, 246, 0.12);
+}
+
+/* ========== CONTENT AREA - Light Theme ========== */
+.content-area {
+    -fx-background-color: transparent;
+}
+
+.page-title {
+    -fx-text-fill: -fx-text-primary;
+}
+
+/* ========== TOOLBAR - Light Theme ========== */
+.toolbar {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-border-color: rgba(139, 92, 246, 0.15);
+    -fx-border-width: 0 0 1px 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 0, 2);
+}
+
+/* ========== TEXT FIELD - Light Theme ========== */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: -fx-text-primary;
+    -fx-prompt-text-fill: -fx-text-muted;
+    -fx-border-color: rgba(139, 92, 246, 0.25);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 1);
+}
+
+.text-field:focused {
+    -fx-background-color: #ffffff;
+}
+
+/* ========== COMBO BOX - Light Theme ========== */
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: rgba(139, 92, 246, 0.25);
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: -fx-text-primary;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #ffffff;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: rgba(139, 92, 246, 0.1);
+}
+
+/* ========== BUTTON - Light Theme ========== */
+.button {
+    -fx-background-color: linear-gradient(135deg, -fx-primary 0%, -fx-primary-dark 100%);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.25), 8, 0, 0, 3);
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(135deg, -fx-primary-dark 0%, -fx-primary 100%);
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.4), 12, 0, 0, 4);
+}
+
+.button.secondary-button {
+    -fx-background-color: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+    -fx-text-fill: -fx-text-primary;
+}
+
+.button.secondary-button:hover {
+    -fx-background-color: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+}
+
+/* ========== THEME TOGGLE - Light Theme ========== */
+.theme-toggle {
+    -fx-background-color: rgba(241, 245, 249, 0.95);
+    -fx-text-fill: -fx-text-primary;
+    -fx-border-color: rgba(139, 92, 246, 0.2);
+    -fx-border-width: 1px;
+}
+
+.theme-toggle:hover {
+    -fx-background-color: rgba(226, 232, 240, 0.95);
+}
+
+/* ========== TABLE VIEW - Light Theme ========== */
+.table-view {
+    -fx-border-color: rgba(139, 92, 246, 0.15);
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, rgba(255, 255, 255, 0.98), rgba(241, 245, 249, 0.95));
+    -fx-border-color: transparent transparent rgba(139, 92, 246, 0.3) transparent;
+    -fx-border-width: 0 0 2px 0;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -fx-text-primary;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: -fx-text-secondary;
+}
+
+.table-row-cell {
+    -fx-background-color: rgba(255, 255, 255, 0.7);
+    -fx-border-color: transparent;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: rgba(241, 245, 249, 0.6);
+}
+
+.table-row-cell:hover {
+    -fx-background-color: rgba(139, 92, 246, 0.1);
+}
+
+.table-row-cell:selected .table-cell {
+    -fx-text-fill: white;
+}
+
+/* ========== LABEL - Light Theme ========== */
+.label {
+    -fx-text-fill: -fx-text-primary;
+}
+
+.label.header-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary;
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.3), 8, 0, 0, 2);
+}
+
+.label.section-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-primary;
+}
+
+/* ========== DIALOG - Light Theme ========== */
+.dialog-pane {
+    -fx-background-color: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.dialog-pane .label {
+    -fx-text-fill: -fx-text-primary;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-text-fill: -fx-primary;
+}
+
+/* ========== DATE PICKER - Light Theme ========== */
+.date-picker {
+    -fx-background-color: #ffffff;
+    -fx-border-color: rgba(139, 92, 246, 0.25);
+}
+
+.date-picker-popup {
+    -fx-background-color: #ffffff;
+}
+
+/* ========== SCROLL BAR - Light Theme ========== */
+.scroll-bar .track {
+    -fx-background-color: rgba(203, 213, 225, 0.4);
+}
+
+/* ========== CHART - Light Theme ========== */
+.chart {
+    -fx-background-color: rgba(255, 255, 255, 0.95);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 8, 0, 0, 2);
+}
+
+.chart-title {
+    -fx-text-fill: -fx-text-primary;
+}
+
+.chart-legend-item-text {
+    -fx-text-fill: -fx-text-secondary;
+}
+
+.chart-pie-label-line {
+    -fx-stroke: -fx-text-muted;
+}
+
+.chart-pie-label {
+    -fx-fill: -fx-text-secondary;
+}
+
+/* Default chart colors - same as dark */
+.default-color0.chart-pie { -fx-pie-color: #8B5CF6; }
+.default-color1.chart-pie { -fx-pie-color: #EC4899; }
+.default-color2.chart-pie { -fx-pie-color: #10B981; }
+
+/* ========== STAT CARD SPECIFIC - Light ========== */
+.stat-card.regular {
+    -fx-background-color: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+}
+
+.stat-card.potential {
+    -fx-background-color: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+}
+
+/* Avatar in light theme - keep same style */
+.avatar {
+    -fx-background-color: linear-gradient(135deg, -fx-primary 0%, -fx-accent 100%);
+}

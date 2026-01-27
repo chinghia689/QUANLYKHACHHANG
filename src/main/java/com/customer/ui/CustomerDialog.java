@@ -2,6 +2,7 @@ package com.customer.ui;
 
 import com.customer.model.Customer;
 import com.customer.model.CustomerType;
+import com.customer.util.ThemeManager;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -135,5 +136,27 @@ public class CustomerDialog extends Dialog<Customer> {
 
         // Request focus on name field
         nameField.requestFocus();
+
+        // Apply current theme to dialog
+        applyTheme();
+    }
+
+    private void applyTheme() {
+        DialogPane dialogPane = getDialogPane();
+        dialogPane.getStylesheets().clear();
+
+        // Add common styles
+        String commonCss = getClass().getResource("/styles/common.css").toExternalForm();
+        dialogPane.getStylesheets().add(commonCss);
+
+        // Add theme-specific styles
+        ThemeManager themeManager = ThemeManager.getInstance();
+        String themeCss;
+        if (themeManager.isDarkTheme()) {
+            themeCss = getClass().getResource("/styles/dark-theme.css").toExternalForm();
+        } else {
+            themeCss = getClass().getResource("/styles/light-theme.css").toExternalForm();
+        }
+        dialogPane.getStylesheets().add(themeCss);
     }
 }

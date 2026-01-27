@@ -1,0 +1,250 @@
+/* ========== DARK THEME ========== */
+
+/* Root Variables - Dark Theme Colors */
+.root {
+    /* Background Colors */
+    -fx-bg-primary: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+    -fx-bg-secondary: #1e293b;
+    -fx-bg-tertiary: #334155;
+    -fx-bg-hover: #475569;
+    -fx-bg-card: rgba(30, 41, 59, 0.8);
+
+    /* Text Colors */
+    -fx-text-primary: #F1F5F9;
+    -fx-text-secondary: #CBD5E1;
+    -fx-text-muted: #94A3B8;
+
+    /* Border Colors */
+    -fx-border-subtle: rgba(139, 92, 246, 0.3);
+}
+
+/* Main Application Background */
+.root {
+    -fx-background-color: -fx-bg-primary;
+}
+
+/* ========== SIDEBAR - Dark Theme ========== */
+.sidebar {
+    -fx-background-color: rgba(15, 23, 42, 0.95);
+    -fx-border-color: rgba(139, 92, 246, 0.2);
+    -fx-border-width: 0 1px 0 0;
+}
+
+.sidebar-header {
+    -fx-border-color: rgba(139, 92, 246, 0.3);
+    -fx-border-width: 0 0 1px 0;
+}
+
+.sidebar-logo {
+    -fx-text-fill: white;
+}
+
+.sidebar-subtitle {
+    -fx-text-fill: -fx-text-muted;
+    -fx-font-size: 11px;
+}
+
+.sidebar-item {
+    -fx-text-fill: -fx-text-secondary;
+    -fx-background-color: transparent;
+}
+
+.sidebar-item:hover {
+    -fx-text-fill: white;
+}
+
+.sidebar-item.selected {
+    -fx-text-fill: white;
+}
+
+/* ========== CONTENT AREA - Dark Theme ========== */
+.content-area {
+    -fx-background-color: transparent;
+}
+
+.page-title {
+    -fx-text-fill: white;
+}
+
+/* ========== TOOLBAR - Dark Theme ========== */
+.toolbar {
+    -fx-background-color: rgba(30, 41, 59, 0.8);
+    -fx-border-color: rgba(139, 92, 246, 0.3);
+    -fx-border-width: 0 0 2px 0;
+}
+
+/* ========== TEXT FIELD - Dark Theme ========== */
+.text-field {
+    -fx-background-color: rgba(51, 65, 85, 0.6);
+    -fx-text-fill: -fx-text-primary;
+    -fx-prompt-text-fill: -fx-text-muted;
+    -fx-border-color: rgba(139, 92, 246, 0.3);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+}
+
+/* ========== COMBO BOX - Dark Theme ========== */
+.combo-box {
+    -fx-background-color: rgba(51, 65, 85, 0.6);
+    -fx-border-color: rgba(139, 92, 246, 0.3);
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: -fx-text-primary;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: -fx-bg-secondary;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: -fx-bg-hover;
+}
+
+/* ========== BUTTON - Dark Theme ========== */
+.button {
+    -fx-background-color: linear-gradient(135deg, -fx-primary 0%, -fx-primary-dark 100%);
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.3), 10, 0, 0, 4);
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(135deg, -fx-primary-dark 0%, -fx-primary 100%);
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.5), 15, 0, 0, 6);
+}
+
+.button.secondary-button {
+    -fx-background-color: linear-gradient(135deg, -fx-bg-tertiary 0%, -fx-bg-secondary 100%);
+}
+
+.button.secondary-button:hover {
+    -fx-background-color: linear-gradient(135deg, -fx-bg-hover 0%, -fx-bg-tertiary 100%);
+}
+
+/* ========== THEME TOGGLE - Dark Theme ========== */
+.theme-toggle {
+    -fx-background-color: rgba(51, 65, 85, 0.8);
+    -fx-text-fill: -fx-text-primary;
+    -fx-border-color: rgba(139, 92, 246, 0.3);
+    -fx-border-width: 1px;
+}
+
+.theme-toggle:hover {
+    -fx-background-color: rgba(71, 85, 105, 0.9);
+}
+
+/* ========== TABLE VIEW - Dark Theme ========== */
+.table-view {
+    -fx-border-color: rgba(139, 92, 246, 0.2);
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, rgba(51, 65, 85, 0.9), rgba(30, 41, 59, 0.9));
+    -fx-border-color: transparent transparent rgba(139, 92, 246, 0.5) transparent;
+    -fx-border-width: 0 0 2px 0;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -fx-text-primary;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: -fx-text-secondary;
+}
+
+.table-row-cell {
+    -fx-background-color: rgba(30, 41, 59, 0.4);
+    -fx-border-color: transparent;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: rgba(51, 65, 85, 0.3);
+}
+
+.table-row-cell:hover {
+    -fx-background-color: rgba(139, 92, 246, 0.2);
+}
+
+/* ========== LABEL - Dark Theme ========== */
+.label {
+    -fx-text-fill: -fx-text-primary;
+}
+
+.label.header-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.5), 10, 0, 0, 2);
+}
+
+.label.section-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-primary;
+}
+
+/* ========== DIALOG - Dark Theme ========== */
+.dialog-pane {
+    -fx-background-color: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+.dialog-pane .label {
+    -fx-text-fill: -fx-text-primary;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-text-fill: white;
+}
+
+/* ========== DATE PICKER - Dark Theme ========== */
+.date-picker {
+    -fx-background-color: rgba(51, 65, 85, 0.6);
+    -fx-border-color: rgba(139, 92, 246, 0.3);
+}
+
+.date-picker-popup {
+    -fx-background-color: -fx-bg-secondary;
+}
+
+/* ========== SCROLL BAR - Dark Theme ========== */
+.scroll-bar .track {
+    -fx-background-color: rgba(51, 65, 85, 0.3);
+}
+
+/* ========== CHART - Dark Theme ========== */
+.chart {
+    -fx-background-color: -fx-bg-card;
+}
+
+.chart-title {
+    -fx-text-fill: white;
+}
+
+.chart-legend-item-symbol {
+    -fx-background-radius: 4px;
+}
+
+.chart-legend-item-text {
+    -fx-text-fill: -fx-text-secondary;
+}
+
+.chart-pie-label-line {
+    -fx-stroke: -fx-text-muted;
+}
+
+.chart-pie-label {
+    -fx-fill: -fx-text-secondary;
+}
+
+/* Default chart colors */
+.default-color0.chart-pie { -fx-pie-color: #8B5CF6; }
+.default-color1.chart-pie { -fx-pie-color: #EC4899; }
+.default-color2.chart-pie { -fx-pie-color: #10B981; }
+
+/* ========== STAT CARD SPECIFIC - Dark ========== */
+.stat-card.regular {
+    -fx-background-color: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+}
+
+.stat-card.potential {
+    -fx-background-color: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+}

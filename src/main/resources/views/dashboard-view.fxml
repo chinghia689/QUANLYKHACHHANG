@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.customer.controller.DashboardController"
+      spacing="20" styleClass="content-area">
+
+    <!-- Page Header -->
+    <HBox styleClass="page-header" alignment="CENTER_LEFT">
+        <Label text="📊 Dashboard" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="refreshBtn" text="🔄 Làm mới" onAction="#handleRefresh"
+                styleClass="secondary-button"/>
+    </HBox>
+
+    <!-- Main Content -->
+    <VBox styleClass="page-content" spacing="25" VBox.vgrow="ALWAYS">
+
+        <!-- Statistics Cards Row -->
+        <HBox fx:id="statsContainer" spacing="20" alignment="CENTER_LEFT">
+            <!-- Total Customers Card -->
+            <VBox fx:id="cardTotal" styleClass="stat-card, total" spacing="8" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Tổng Khách Hàng" styleClass="stat-card-title"/>
+                        <Label fx:id="lblTotalCount" text="0" styleClass="stat-card-value"/>
+                    </VBox>
+                    <Label text="👥" styleClass="stat-card-icon"/>
+                </HBox>
+            </VBox>
+
+            <!-- VIP Customers Card -->
+            <VBox fx:id="cardVip" styleClass="stat-card, vip" spacing="8" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Khách VIP" styleClass="stat-card-title"/>
+                        <Label fx:id="lblVipCount" text="0" styleClass="stat-card-value"/>
+                    </VBox>
+                    <Label text="⭐" styleClass="stat-card-icon"/>
+                </HBox>
+            </VBox>
+
+            <!-- New Customers Card -->
+            <VBox fx:id="cardNew" styleClass="stat-card, new" spacing="8" HBox.hgrow="ALWAYS">
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Label text="Mới Tháng Này" styleClass="stat-card-title"/>
+                        <Label fx:id="lblNewCount" text="0" styleClass="stat-card-value"/>
+                    </VBox>
+                    <Label text="🆕" styleClass="stat-card-icon"/>
+                </HBox>
+            </VBox>
+        </HBox>
+
+        <!-- Charts Section -->
+        <HBox spacing="20" VBox.vgrow="ALWAYS">
+            <!-- Pie Chart -->
+            <VBox styleClass="chart" spacing="15" HBox.hgrow="ALWAYS">
+                <Label text="Phân Loại Khách Hàng" styleClass="chart-title"/>
+                <PieChart fx:id="typeDistributionChart" legendSide="BOTTOM"
+                          VBox.vgrow="ALWAYS" animated="true"/>
+            </VBox>
+
+            <!-- Recent Customers or Additional Stats -->
+            <VBox styleClass="chart" spacing="15" HBox.hgrow="ALWAYS">
+                <Label text="Thống Kê Chi Tiết" styleClass="chart-title"/>
+                <VBox spacing="12" VBox.vgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="🟣 VIP:" style="-fx-font-weight: bold;"/>
+                        <Label fx:id="lblVipPercent" text="0%"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="lblVipDetail" text="0 khách"/>
+                    </HBox>
+                    <Separator/>
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="🔵 Thường:" style="-fx-font-weight: bold;"/>
+                        <Label fx:id="lblRegularPercent" text="0%"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="lblRegularDetail" text="0 khách"/>
+                    </HBox>
+                    <Separator/>
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="🟢 Tiềm năng:" style="-fx-font-weight: bold;"/>
+                        <Label fx:id="lblPotentialPercent" text="0%"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="lblPotentialDetail" text="0 khách"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </HBox>
+
+    </VBox>
+
+    <!-- Loading Overlay -->
+    <StackPane fx:id="loadingOverlay" styleClass="loading-overlay" visible="false" managed="false">
+        <ProgressIndicator styleClass="loading-spinner" maxWidth="50" maxHeight="50"/>
+    </StackPane>
+
+</VBox>
