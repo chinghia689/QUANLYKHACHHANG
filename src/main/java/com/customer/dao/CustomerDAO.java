@@ -7,6 +7,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -160,7 +161,14 @@ public class CustomerDAO {
         CustomerType customerType = CustomerType.valueOf(rs.getString("customer_type"));
 
         String createdDateString = rs.getString("created_date");
-        LocalDateTime createdDate = LocalDateTime.parse(createdDateString);
+        // Handle both ISO format (with T) and database format (with space)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime createdDate;
+        if (createdDateString.contains("T")) {
+            createdDate = LocalDateTime.parse(createdDateString);
+        } else {
+            createdDate = LocalDateTime.parse(createdDateString, formatter);
+        }
 
         return new Customer(id, fullName, phone, email, address, dateOfBirth, customerType, createdDate);
     }
@@ -174,7 +182,7 @@ public class CustomerDAO {
         String sql = "SELECT COUNT(*) as total FROM customers";
 
         try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+                ResultSet rs = stmt.executeQuery(sql)) {
             if (rs.next()) {
                 return rs.getInt("total");
             }
@@ -237,7 +245,7 @@ public class CustomerDAO {
         String sql = "SELECT customer_type, COUNT(*) as count FROM customers GROUP BY customer_type";
 
         try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+                ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 String typeName = rs.getString("customer_type");
                 int count = rs.getInt("count");

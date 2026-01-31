@@ -3,7 +3,7 @@
 /* Root Variables - Dark Theme Colors */
 .root {
     /* Background Colors */
-    -fx-bg-primary: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+    -fx-bg-primary: #1e1b4b;
     -fx-bg-secondary: #1e293b;
     -fx-bg-tertiary: #334155;
     -fx-bg-hover: #475569;
@@ -20,7 +20,7 @@
 
 /* Main Application Background */
 .root {
-    -fx-background-color: -fx-bg-primary;
+    -fx-background-color: linear-gradient(to bottom right, #1e1b4b 0%, #0f172a 100%);
 }
 
 /* ========== SIDEBAR - Dark Theme ========== */
@@ -102,22 +102,22 @@
 
 /* ========== BUTTON - Dark Theme ========== */
 .button {
-    -fx-background-color: linear-gradient(135deg, -fx-primary 0%, -fx-primary-dark 100%);
+    -fx-background-color: linear-gradient(to bottom right, #8B5CF6 0%, #7C3AED 100%);
     -fx-text-fill: white;
     -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.3), 10, 0, 0, 4);
 }
 
 .button:hover {
-    -fx-background-color: linear-gradient(135deg, -fx-primary-dark 0%, -fx-primary 100%);
+    -fx-background-color: linear-gradient(to bottom right, #7C3AED 0%, #8B5CF6 100%);
     -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.5), 15, 0, 0, 6);
 }
 
 .button.secondary-button {
-    -fx-background-color: linear-gradient(135deg, -fx-bg-tertiary 0%, -fx-bg-secondary 100%);
+    -fx-background-color: linear-gradient(to bottom right, #334155 0%, #1e293b 100%);
 }
 
 .button.secondary-button:hover {
-    -fx-background-color: linear-gradient(135deg, -fx-bg-hover 0%, -fx-bg-tertiary 100%);
+    -fx-background-color: linear-gradient(to bottom right, #475569 0%, #334155 100%);
 }
 
 /* ========== THEME TOGGLE - Dark Theme ========== */
@@ -184,7 +184,7 @@
 
 /* ========== DIALOG - Dark Theme ========== */
 .dialog-pane {
-    -fx-background-color: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    -fx-background-color: linear-gradient(to bottom right, #1e293b 0%, #0f172a 100%);
 }
 
 .dialog-pane .label {
@@ -236,15 +236,23 @@
 }
 
 /* Default chart colors */
-.default-color0.chart-pie { -fx-pie-color: #8B5CF6; }
-.default-color1.chart-pie { -fx-pie-color: #EC4899; }
-.default-color2.chart-pie { -fx-pie-color: #10B981; }
+.default-color0.chart-pie {
+    -fx-pie-color: #8B5CF6;
+}
+
+.default-color1.chart-pie {
+    -fx-pie-color: #EC4899;
+}
+
+.default-color2.chart-pie {
+    -fx-pie-color: #10B981;
+}
 
 /* ========== STAT CARD SPECIFIC - Dark ========== */
 .stat-card.regular {
-    -fx-background-color: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    -fx-background-color: linear-gradient(to bottom right, #3B82F6 0%, #2563EB 100%);
 }
 
 .stat-card.potential {
-    -fx-background-color: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    -fx-background-color: linear-gradient(to bottom right, #F59E0B 0%, #D97706 100%);
 }

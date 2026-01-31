@@ -77,27 +77,30 @@
 .stat-card-title {
     -fx-font-size: 13px;
     -fx-font-weight: normal;
+    -fx-text-fill: white;
 }
 
 .stat-card-value {
     -fx-font-size: 32px;
     -fx-font-weight: bold;
+    -fx-text-fill: white;
 }
 
 .stat-card-icon {
     -fx-font-size: 28px;
+    -fx-text-fill: white;
 }
 
 .stat-card.total {
-    -fx-background-color: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+    -fx-background-color: linear-gradient(to bottom right, #8B5CF6 0%, #7C3AED 100%);
 }
 
 .stat-card.vip {
-    -fx-background-color: linear-gradient(135deg, #EC4899 0%, #DB2777 100%);
+    -fx-background-color: linear-gradient(to bottom right, #EC4899 0%, #DB2777 100%);
 }
 
 .stat-card.new {
-    -fx-background-color: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    -fx-background-color: linear-gradient(to bottom right, #10B981 0%, #059669 100%);
 }
 
 .stat-card .stat-card-title,
@@ -117,7 +120,7 @@
     -fx-max-width: 36px;
     -fx-max-height: 36px;
     -fx-background-radius: 18px;
-    -fx-background-color: linear-gradient(135deg, -fx-primary 0%, -fx-accent 100%);
+    -fx-background-color: linear-gradient(to bottom right, #8B5CF6 0%, #EC4899 100%);
     -fx-alignment: CENTER;
 }
 
@@ -213,18 +216,18 @@
 
 /* Button Variants */
 .button.primary-button {
-    -fx-background-color: linear-gradient(135deg, -fx-primary 0%, -fx-primary-dark 100%);
+    -fx-background-color: linear-gradient(to bottom right, #8B5CF6 0%, #7C3AED 100%);
     -fx-text-fill: white;
     -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.3), 10, 0, 0, 4);
 }
 
 .button.primary-button:hover {
-    -fx-background-color: linear-gradient(135deg, -fx-primary-dark 0%, -fx-primary 100%);
+    -fx-background-color: linear-gradient(to bottom right, #7C3AED 0%, #8B5CF6 100%);
     -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.5), 15, 0, 0, 6);
 }
 
 .button.success-button {
-    -fx-background-color: linear-gradient(135deg, -fx-success 0%, #059669 100%);
+    -fx-background-color: linear-gradient(to bottom right, #10B981 0%, #059669 100%);
     -fx-text-fill: white;
     -fx-effect: dropshadow(gaussian, rgba(16, 185, 129, 0.3), 10, 0, 0, 4);
 }
@@ -234,7 +237,7 @@
 }
 
 .button.danger-button {
-    -fx-background-color: linear-gradient(135deg, -fx-danger 0%, #DC2626 100%);
+    -fx-background-color: linear-gradient(to bottom right, #EF4444 0%, #DC2626 100%);
     -fx-text-fill: white;
     -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.3), 10, 0, 0, 4);
 }

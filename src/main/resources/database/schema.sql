@@ -1,16 +1,18 @@
--- MySQL Schema for Customer Management Application
+-- SQLite Schema for Customer Management Application
 
 CREATE TABLE IF NOT EXISTS customers (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    full_name VARCHAR(255) NOT NULL,
-    phone VARCHAR(20),
-    email VARCHAR(100),
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    full_name TEXT NOT NULL,
+    phone TEXT,
+    email TEXT,
     address TEXT,
-    date_of_birth DATE,
-    customer_type VARCHAR(20) NOT NULL,
-    created_date DATETIME NOT NULL,
-    INDEX idx_full_name (full_name),
-    INDEX idx_phone (phone),
-    INDEX idx_email (email),
-    INDEX idx_customer_type (customer_type)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    date_of_birth TEXT,
+    customer_type TEXT NOT NULL,
+    created_date TEXT NOT NULL
+);
+
+-- Separate index creation for SQLite
+CREATE INDEX IF NOT EXISTS idx_full_name ON customers (full_name);
+CREATE INDEX IF NOT EXISTS idx_phone ON customers (phone);
+CREATE INDEX IF NOT EXISTS idx_email ON customers (email);
+CREATE INDEX IF NOT EXISTS idx_customer_type ON customers (customer_type);

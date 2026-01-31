@@ -10,36 +10,28 @@ import java.sql.Statement;
 import java.util.stream.Collectors;
 
 public class DatabaseManager {
-    // MySQL/XAMPP Configuration
-    private static final String DB_HOST = "localhost";
-    private static final String DB_PORT = "3306";
-    private static final String DB_NAME = "customer_management";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = ""; // XAMPP default: empty password
-
-    private static final String DB_URL = String.format(
-            "jdbc:mysql://%s:%s/%s?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true",
-            DB_HOST, DB_PORT, DB_NAME);
+    // SQLite Configuration
+    private static final String DB_FILE = "customer_database.db";
+    private static final String DB_URL = "jdbc:sqlite:" + DB_FILE;
 
     private static DatabaseManager instance;
     private Connection connection;
 
     private DatabaseManager() {
         try {
-            // Load MySQL JDBC Driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            // Load SQLite JDBC Driver
+            Class.forName("org.sqlite.JDBC");
 
-            // Connect to MySQL
-            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            // Connect to SQLite
+            connection = DriverManager.getConnection(DB_URL);
             initializeDatabase();
-            System.out.println("✅ MySQL Database connected successfully!");
-            System.out.println("📍 Database: " + DB_NAME + " on " + DB_HOST + ":" + DB_PORT);
+            System.out.println("✅ SQLite Database connected successfully!");
+            System.out.println("📍 Database file: " + DB_FILE);
         } catch (ClassNotFoundException e) {
-            System.err.println("❌ MySQL JDBC Driver not found: " + e.getMessage());
+            System.err.println("❌ SQLite JDBC Driver not found: " + e.getMessage());
             e.printStackTrace();
         } catch (SQLException e) {
             System.err.println("❌ Database connection failed: " + e.getMessage());
-            System.err.println("💡 Make sure XAMPP MySQL is running!");
             e.printStackTrace();
         }
     }
@@ -54,7 +46,7 @@ public class DatabaseManager {
     public Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
-                connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                connection = DriverManager.getConnection(DB_URL);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -109,6 +101,6 @@ public class DatabaseManager {
 
     // Helper method to get connection parameters (for display purposes)
     public static String getConnectionInfo() {
-        return "MySQL @ " + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
+        return "SQLite @ " + DB_FILE;
     }
 }

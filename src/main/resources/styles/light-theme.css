@@ -3,7 +3,7 @@
 /* Root Variables - Light Theme Colors */
 .root {
     /* Background Colors */
-    -fx-bg-primary: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    -fx-bg-primary: #f8fafc;
     -fx-bg-secondary: #ffffff;
     -fx-bg-tertiary: #f1f5f9;
     -fx-bg-hover: #e2e8f0;
@@ -20,7 +20,7 @@
 
 /* Main Application Background */
 .root {
-    -fx-background-color: -fx-bg-primary;
+    -fx-background-color: linear-gradient(to bottom, #f8fafc 0%, #e2e8f0 100%);
 }
 
 /* ========== SIDEBAR - Light Theme ========== */
@@ -110,23 +110,23 @@
 
 /* ========== BUTTON - Light Theme ========== */
 .button {
-    -fx-background-color: linear-gradient(135deg, -fx-primary 0%, -fx-primary-dark 100%);
+    -fx-background-color: linear-gradient(to bottom, #8B5CF6 0%, #7C3AED 100%);
     -fx-text-fill: white;
     -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.25), 8, 0, 0, 3);
 }
 
 .button:hover {
-    -fx-background-color: linear-gradient(135deg, -fx-primary-dark 0%, -fx-primary 100%);
+    -fx-background-color: linear-gradient(to bottom, #7C3AED 0%, #8B5CF6 100%);
     -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.4), 12, 0, 0, 4);
 }
 
 .button.secondary-button {
-    -fx-background-color: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+    -fx-background-color: linear-gradient(to bottom right, #e2e8f0 0%, #cbd5e1 100%);
     -fx-text-fill: -fx-text-primary;
 }
 
 .button.secondary-button:hover {
-    -fx-background-color: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+    -fx-background-color: linear-gradient(to bottom right, #cbd5e1 0%, #94a3b8 100%);
 }
 
 /* ========== THEME TOGGLE - Light Theme ========== */
@@ -198,7 +198,7 @@
 
 /* ========== DIALOG - Light Theme ========== */
 .dialog-pane {
-    -fx-background-color: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    -fx-background-color: linear-gradient(to bottom right, #ffffff 0%, #f8fafc 100%);
 }
 
 .dialog-pane .label {
@@ -247,20 +247,28 @@
 }
 
 /* Default chart colors - same as dark */
-.default-color0.chart-pie { -fx-pie-color: #8B5CF6; }
-.default-color1.chart-pie { -fx-pie-color: #EC4899; }
-.default-color2.chart-pie { -fx-pie-color: #10B981; }
+.default-color0.chart-pie {
+    -fx-pie-color: #8B5CF6;
+}
+
+.default-color1.chart-pie {
+    -fx-pie-color: #EC4899;
+}
+
+.default-color2.chart-pie {
+    -fx-pie-color: #10B981;
+}
 
 /* ========== STAT CARD SPECIFIC - Light ========== */
 .stat-card.regular {
-    -fx-background-color: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    -fx-background-color: linear-gradient(to bottom right, #3B82F6 0%, #2563EB 100%);
 }
 
 .stat-card.potential {
-    -fx-background-color: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    -fx-background-color: linear-gradient(to bottom right, #F59E0B 0%, #D97706 100%);
 }
 
 /* Avatar in light theme - keep same style */
 .avatar {
-    -fx-background-color: linear-gradient(135deg, -fx-primary 0%, -fx-accent 100%);
+    -fx-background-color: linear-gradient(to bottom, #8B5CF6 0%, #EC4899 100%);
 }
