@@ -20,25 +20,25 @@ public class CustomerDialog extends Dialog<Customer> {
     public CustomerDialog(Customer customer, boolean isEdit) {
         this.customer = customer;
 
-        setTitle(isEdit ? "Sửa Khách Hàng" : "Thêm Khách Hàng Mới");
-        setHeaderText(isEdit ? "Cập nhật thông tin khách hàng" : "Nhập thông tin khách hàng mới");
+        setTitle(isEdit ? "Edit Customer" : "Add New Customer");
+        setHeaderText(isEdit ? "Update customer information" : "Enter new customer information");
 
         // Create form fields
         nameField = new TextField(customer.getFullName());
-        nameField.setPromptText("Nhập họ tên");
+        nameField.setPromptText("Enter full name");
 
         phoneField = new TextField(customer.getPhone());
-        phoneField.setPromptText("Nhập số điện thoại");
+        phoneField.setPromptText("Enter phone number");
 
         emailField = new TextField(customer.getEmail());
-        emailField.setPromptText("Nhập email");
+        emailField.setPromptText("Enter email");
 
         addressArea = new TextArea(customer.getAddress());
-        addressArea.setPromptText("Nhập địa chỉ");
+        addressArea.setPromptText("Enter address");
         addressArea.setPrefRowCount(3);
 
         dobPicker = new DatePicker(customer.getDateOfBirth());
-        dobPicker.setPromptText("Chọn ngày sinh");
+        dobPicker.setPromptText("Select birthday");
 
         typeComboBox = new ComboBox<>();
         typeComboBox.getItems().addAll(CustomerType.values());
@@ -76,22 +76,22 @@ public class CustomerDialog extends Dialog<Customer> {
         grid.setPadding(new Insets(20));
 
         // Add labels and fields
-        grid.add(new Label("Họ tên: *"), 0, 0);
+        grid.add(new Label("Full Name: *"), 0, 0);
         grid.add(nameField, 1, 0);
 
-        grid.add(new Label("Số điện thoại:"), 0, 1);
+        grid.add(new Label("Phone Number:"), 0, 1);
         grid.add(phoneField, 1, 1);
 
         grid.add(new Label("Email:"), 0, 2);
         grid.add(emailField, 1, 2);
 
-        grid.add(new Label("Địa chỉ:"), 0, 3);
+        grid.add(new Label("Address:"), 0, 3);
         grid.add(addressArea, 1, 3);
 
-        grid.add(new Label("Ngày sinh:"), 0, 4);
+        grid.add(new Label("Birthday:"), 0, 4);
         grid.add(dobPicker, 1, 4);
 
-        grid.add(new Label("Loại khách hàng: *"), 0, 5);
+        grid.add(new Label("Customer Type: *"), 0, 5);
         grid.add(typeComboBox, 1, 5);
 
         // Set column constraints for better layout
@@ -109,8 +109,8 @@ public class CustomerDialog extends Dialog<Customer> {
         getDialogPane().setContent(content);
 
         // Add buttons
-        ButtonType saveButtonType = new ButtonType("Lưu", ButtonBar.ButtonData.OK_DONE);
-        ButtonType cancelButtonType = new ButtonType("Hủy", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType saveButtonType = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         getDialogPane().getButtonTypes().addAll(saveButtonType, cancelButtonType);
 
         // Style buttons

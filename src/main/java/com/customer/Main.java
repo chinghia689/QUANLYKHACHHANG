@@ -14,12 +14,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Load FXML - now loading app-view.fxml with sidebar layout
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/app-view.fxml"));
+            // Load FXML - load login-view.fxml first
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login-view.fxml"));
             Parent root = loader.load();
 
             // Create scene
-            Scene scene = new Scene(root, 1200, 700);
+            Scene scene = new Scene(root, 400, 500);
 
             // Initialize ThemeManager and apply theme
             ThemeManager themeManager = ThemeManager.getInstance();
@@ -27,10 +27,9 @@ public class Main extends Application {
             themeManager.applyTheme();
 
             // Configure stage
-            primaryStage.setTitle("Quản Lý Khách Hàng - Customer Management");
+            primaryStage.setTitle("Login - Customer Management");
             primaryStage.setScene(scene);
-            primaryStage.setMinWidth(1000);
-            primaryStage.setMinHeight(600);
+            primaryStage.setResizable(false);
 
             // Show stage
             primaryStage.show();

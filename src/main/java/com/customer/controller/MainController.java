@@ -60,7 +60,7 @@ public class MainController {
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("customerType"));
         dobColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
 
-        // Set custom cell factory for customer type to show Vietnamese display name
+        // Set custom cell factory for customer type to show display name
         typeColumn.setCellFactory(column -> new TableCell<Customer, CustomerType>() {
             @Override
             protected void updateItem(CustomerType item, boolean empty) {
@@ -78,7 +78,7 @@ public class MainController {
         // Initialize filter combo box
         filterComboBox.getItems().add(null); // "All" option
         filterComboBox.getItems().addAll(CustomerType.values());
-        filterComboBox.setPromptText("Tất cả");
+        filterComboBox.setPromptText("All");
 
         // Custom button cell for combo box
         filterComboBox.setButtonCell(new ListCell<CustomerType>() {
@@ -86,7 +86,7 @@ public class MainController {
             protected void updateItem(CustomerType item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
-                    setText("Tất cả");
+                    setText("All");
                 } else {
                     setText(item.getDisplayName());
                 }
@@ -99,7 +99,7 @@ public class MainController {
             protected void updateItem(CustomerType item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
-                    setText("Tất cả");
+                    setText("All");
                 } else {
                     setText(item.getDisplayName());
                 }
@@ -119,7 +119,7 @@ public class MainController {
             customerList.clear();
             customerList.addAll(customerService.getAllCustomers());
         } catch (Exception e) {
-            showError("Lỗi tải dữ liệu", "Không thể tải danh sách khách hàng: " + e.getMessage());
+            showError("Load Error", "Cannot load customer list: " + e.getMessage());
         }
     }
 
@@ -129,7 +129,7 @@ public class MainController {
             customerList.clear();
             customerList.addAll(customerService.searchCustomers(keyword));
         } catch (Exception e) {
-            showError("Lỗi tìm kiếm", "Không thể tìm kiếm khách hàng: " + e.getMessage());
+            showError("Search Error", "Cannot search customers: " + e.getMessage());
         }
     }
 
@@ -143,7 +143,7 @@ public class MainController {
                 customerList.addAll(customerService.getCustomersByType(selectedType));
             }
         } catch (Exception e) {
-            showError("Lỗi lọc dữ liệu", "Không thể lọc khách hàng: " + e.getMessage());
+            showError("Filter Error", "Cannot filter customers: " + e.getMessage());
         }
     }
 
@@ -159,11 +159,11 @@ public class MainController {
             try {
                 customerService.addCustomer(customer);
                 loadCustomers();
-                showSuccess("Thành công", "Đã thêm khách hàng mới!");
+                showSuccess("Success", "New customer added!");
             } catch (CustomerService.ValidationException e) {
-                showError("Lỗi xác thực", e.getMessage());
+                showError("Validation Error", e.getMessage());
             } catch (Exception e) {
-                showError("Lỗi", "Không thể thêm khách hàng: " + e.getMessage());
+                showError("Error", "Cannot add customer: " + e.getMessage());
             }
         });
     }
@@ -172,7 +172,7 @@ public class MainController {
     private void handleEdit() {
         Customer selected = customerTable.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            showWarning("Chưa chọn khách hàng", "Vui lòng chọn một khách hàng để sửa!");
+            showWarning("No Selection", "Please select a customer to edit!");
             return;
         }
 
@@ -183,11 +183,11 @@ public class MainController {
             try {
                 customerService.updateCustomer(customer);
                 loadCustomers();
-                showSuccess("Thành công", "Đã cập nhật thông tin khách hàng!");
+                showSuccess("Success", "Customer updated!");
             } catch (CustomerService.ValidationException e) {
-                showError("Lỗi xác thực", e.getMessage());
+                showError("Validation Error", e.getMessage());
             } catch (Exception e) {
-                showError("Lỗi", "Không thể cập nhật khách hàng: " + e.getMessage());
+                showError("Error", "Cannot update customer: " + e.getMessage());
             }
         });
     }
@@ -196,23 +196,23 @@ public class MainController {
     private void handleDelete() {
         Customer selected = customerTable.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            showWarning("Chưa chọn khách hàng", "Vui lòng chọn một khách hàng để xóa!");
+            showWarning("No Selection", "Please select a customer to delete!");
             return;
         }
 
         Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmDialog.setTitle("Xác nhận xóa");
-        confirmDialog.setHeaderText("Bạn có chắc chắn muốn xóa khách hàng này?");
-        confirmDialog.setContentText("Tên: " + selected.getFullName() + "\nSĐT: " + selected.getPhone());
+        confirmDialog.setTitle("Confirm Delete");
+        confirmDialog.setHeaderText("Are you sure you want to delete this customer?");
+        confirmDialog.setContentText("Name: " + selected.getFullName() + "\nPhone: " + selected.getPhone());
 
         Optional<ButtonType> result = confirmDialog.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
                 customerService.deleteCustomer(selected.getId());
                 loadCustomers();
-                showSuccess("Thành công", "Đã xóa khách hàng!");
+                showSuccess("Success", "Customer deleted!");
             } catch (Exception e) {
-                showError("Lỗi", "Không thể xóa khách hàng: " + e.getMessage());
+                showError("Error", "Cannot delete customer: " + e.getMessage());
             }
         }
     }

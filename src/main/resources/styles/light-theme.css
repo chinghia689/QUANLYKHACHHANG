@@ -272,3 +272,7 @@
 .avatar {
     -fx-background-color: linear-gradient(to bottom, #8B5CF6 0%, #EC4899 100%);
 }
+/* User Info - Light Theme */
+.user-name-label {
+    -fx-text-fill: -fx-text-primary;
+}

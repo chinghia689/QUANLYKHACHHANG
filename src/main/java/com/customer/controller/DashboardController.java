@@ -155,11 +155,11 @@ public class DashboardController {
     private void updateDetailLabels(int total, int vip, int regular, int potential) {
         if (total == 0) {
             lblVipPercent.setText("0%");
-            lblVipDetail.setText("0 khách");
+            lblVipDetail.setText("0 customers");
             lblRegularPercent.setText("0%");
-            lblRegularDetail.setText("0 khách");
+            lblRegularDetail.setText("0 customers");
             lblPotentialPercent.setText("0%");
-            lblPotentialDetail.setText("0 khách");
+            lblPotentialDetail.setText("0 customers");
             return;
         }
 
@@ -168,13 +168,13 @@ public class DashboardController {
         double potentialPercent = (potential * 100.0) / total;
 
         lblVipPercent.setText(String.format("%.1f%%", vipPercent));
-        lblVipDetail.setText(vip + " khách");
+        lblVipDetail.setText(vip + " customers");
 
         lblRegularPercent.setText(String.format("%.1f%%", regularPercent));
-        lblRegularDetail.setText(regular + " khách");
+        lblRegularDetail.setText(regular + " customers");
 
         lblPotentialPercent.setText(String.format("%.1f%%", potentialPercent));
-        lblPotentialDetail.setText(potential + " khách");
+        lblPotentialDetail.setText(potential + " customers");
     }
 
     private void updatePieChart(int vip, int regular, int potential) {
@@ -184,14 +184,14 @@ public class DashboardController {
             pieData.add(new PieChart.Data("VIP (" + vip + ")", vip));
         }
         if (regular > 0) {
-            pieData.add(new PieChart.Data("Thường (" + regular + ")", regular));
+            pieData.add(new PieChart.Data("Regular (" + regular + ")", regular));
         }
         if (potential > 0) {
-            pieData.add(new PieChart.Data("Tiềm năng (" + potential + ")", potential));
+            pieData.add(new PieChart.Data("Potential (" + potential + ")", potential));
         }
 
         if (pieData.isEmpty()) {
-            pieData.add(new PieChart.Data("Chưa có dữ liệu", 1));
+            pieData.add(new PieChart.Data("No Data", 1));
         }
 
         typeDistributionChart.setData(pieData);

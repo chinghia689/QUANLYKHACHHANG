@@ -10,28 +10,33 @@ import java.sql.Statement;
 import java.util.stream.Collectors;
 
 public class DatabaseManager {
-    // SQLite Configuration
-    private static final String DB_FILE = "customer_database.db";
-    private static final String DB_URL = "jdbc:sqlite:" + DB_FILE;
+    // MySQL Configuration
+    private static final String DB_HOST = "localhost";
+    private static final String DB_PORT = "3306";
+    private static final String DB_NAME = "quanlykhachhang";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "";
+    private static final String DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME
+            + "?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
 
     private static DatabaseManager instance;
     private Connection connection;
 
     private DatabaseManager() {
         try {
-            // Load SQLite JDBC Driver
-            Class.forName("org.sqlite.JDBC");
+            // Load MySQL JDBC Driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Connect to SQLite
-            connection = DriverManager.getConnection(DB_URL);
+            // Connect to MySQL
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             initializeDatabase();
-            System.out.println("✅ SQLite Database connected successfully!");
-            System.out.println("📍 Database file: " + DB_FILE);
+            System.out.println("MySQL Database connected successfully!");
+            System.out.println("Database: " + DB_NAME + " @ " + DB_HOST + ":" + DB_PORT);
         } catch (ClassNotFoundException e) {
-            System.err.println("❌ SQLite JDBC Driver not found: " + e.getMessage());
+            System.err.println("MySQL JDBC Driver not found: " + e.getMessage());
             e.printStackTrace();
         } catch (SQLException e) {
-            System.err.println("❌ Database connection failed: " + e.getMessage());
+            System.err.println("Database connection failed: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -46,22 +51,24 @@ public class DatabaseManager {
     public Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
-                connection = DriverManager.getConnection(DB_URL);
+                connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             }
         } catch (SQLException e) {
+            System.err.println("Failed to get connection: " + e.getMessage());
             e.printStackTrace();
+            // Re-throw or handle accordingly, but returning null causes the NPE
         }
         return connection;
     }
 
     private void initializeDatabase() {
         try {
-            // Read schema.sql from resources
+            // Read mysql-schema.sql from resources
             InputStream is = getClass().getClassLoader()
-                    .getResourceAsStream("database/schema.sql");
+                    .getResourceAsStream("database/mysql-schema.sql");
 
             if (is == null) {
-                System.err.println("⚠️  schema.sql not found in resources");
+                System.err.println("mysql-schema.sql not found in resources");
                 return;
             }
 
@@ -74,16 +81,24 @@ public class DatabaseManager {
                 // Split by semicolon and execute each statement
                 String[] statements = sql.split(";");
                 for (String stmt : statements) {
-                    if (!stmt.trim().isEmpty()) {
-                        statement.execute(stmt.trim());
+                    String trimmed = stmt.trim();
+                    if (!trimmed.isEmpty() && !trimmed.startsWith("--")) {
+                        try {
+                            statement.execute(trimmed);
+                        } catch (SQLException e) {
+                            // Ignore "database already exists" or "index already exists" errors
+                            if (!e.getMessage().contains("already exists")) {
+                                System.err.println("SQL Error: " + e.getMessage());
+                            }
+                        }
                     }
                 }
             }
 
-            System.out.println("✅ Database schema initialized successfully!");
+            System.out.println("Database schema initialized successfully!");
 
         } catch (Exception e) {
-            System.err.println("❌ Failed to initialize database: " + e.getMessage());
+            System.err.println("Failed to initialize database: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -92,15 +107,14 @@ public class DatabaseManager {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                System.out.println("✅ Database connection closed");
+                System.out.println("Database connection closed");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    // Helper method to get connection parameters (for display purposes)
     public static String getConnectionInfo() {
-        return "SQLite @ " + DB_FILE;
+        return "MySQL @ " + DB_HOST + ":" + DB_PORT + "/" + DB_NAME;
     }
 }

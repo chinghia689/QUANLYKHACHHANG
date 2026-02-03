@@ -17,8 +17,8 @@
             <HBox styleClass="sidebar-header" alignment="CENTER_LEFT" spacing="10">
                 <Label text="CRM" styleClass="sidebar-logo"/>
                 <VBox alignment="CENTER_LEFT">
-                    <Label text="Quản Lý KH" styleClass="sidebar-logo" style="-fx-font-size: 14px;"/>
-                    <Label text="Customer Management" styleClass="sidebar-subtitle"/>
+                    <Label text="Customer Mgmt" styleClass="sidebar-logo" style="-fx-font-size: 14px;"/>
+                    <Label text="System" styleClass="sidebar-subtitle"/>
                 </VBox>
             </HBox>
 
@@ -39,18 +39,37 @@
                 <HBox fx:id="menuCustomers" styleClass="sidebar-item"
                       onMouseClicked="#handleMenuCustomers" alignment="CENTER_LEFT">
                     <Label text="👥" styleClass="sidebar-icon"/>
-                    <Label text="Khách Hàng"/>
+                    <Label text="Customers"/>
+                </HBox>
+
+                <!-- Users Menu Item (Admin only) -->
+                <HBox fx:id="menuUsers" styleClass="sidebar-item"
+                      onMouseClicked="#handleMenuUsers" alignment="CENTER_LEFT" visible="false" managed="false">
+                    <Label text="👤" styleClass="sidebar-icon"/>
+                    <Label text="Users"/>
                 </HBox>
             </VBox>
 
-            <!-- Bottom Section - Theme Toggle -->
+            <!-- Bottom Section - Theme Toggle & User Info -->
             <VBox alignment="CENTER" spacing="10">
                 <padding>
-                    <Insets bottom="20" top="20"/>
+                    <Insets bottom="20" top="20" left="10" right="10"/>
                 </padding>
 
                 <Button fx:id="themeToggleBtn" text="🌙 Dark"
                         onAction="#handleThemeToggle" styleClass="theme-toggle"/>
+
+                <Separator prefWidth="200.0" />
+
+                <VBox alignment="CENTER" spacing="2">
+                    <Label fx:id="userNameLabel" text="User Name" styleClass="user-name-label"/>
+                    <Label fx:id="userRoleLabel" text="Role" styleClass="user-role-label"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="5">
+                    <Button text="Change Password" onAction="#handleChangePassword" styleClass="text-button"/>
+                    <Button text="Logout" onAction="#handleLogout" styleClass="text-button, danger-text"/>
+                </VBox>
             </VBox>
         </VBox>
     </left>

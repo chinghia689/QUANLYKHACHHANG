@@ -85,3 +85,9 @@ Desktop.ini
 # Logs
 logs/
 *.log
+
+# Local Database Data
+mysql_data/
+
+# Temp files
+cp.txt

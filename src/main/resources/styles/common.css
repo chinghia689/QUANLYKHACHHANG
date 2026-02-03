@@ -381,3 +381,35 @@
     -fx-spacing: 15px;
     -fx-background-radius: 0;
 }
+/* ========== USER INFO & TEXT BUTTONS ========== */
+.user-name-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.user-role-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: -fx-text-muted;
+}
+
+.text-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-secondary;
+    -fx-cursor: hand;
+    -fx-font-size: 11px;
+    -fx-padding: 5px 10px;
+    -fx-underline: false;
+}
+
+.text-button:hover {
+    -fx-background-color: rgba(139, 92, 246, 0.1);
+    -fx-underline: true;
+}
+
+.text-button.danger-text {
+    -fx-text-fill: -fx-danger;
+}
+
+.text-button.danger-text:hover {
+    -fx-background-color: rgba(239, 68, 68, 0.1);
+}

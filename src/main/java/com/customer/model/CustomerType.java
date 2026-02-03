@@ -2,8 +2,8 @@ package com.customer.model;
 
 public enum CustomerType {
     VIP("VIP"),
-    REGULAR("Thường"),
-    POTENTIAL("Tiềm năng");
+    REGULAR("Regular"),
+    POTENTIAL("Potential");
 
     private final String displayName;
 

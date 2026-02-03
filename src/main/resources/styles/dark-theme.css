@@ -256,3 +256,7 @@
 .stat-card.potential {
     -fx-background-color: linear-gradient(to bottom right, #F59E0B 0%, #D97706 100%);
 }
+/* User Info - Dark Theme */
+.user-name-label {
+    -fx-text-fill: white;
+}

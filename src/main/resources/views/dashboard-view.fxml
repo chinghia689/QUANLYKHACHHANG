@@ -14,7 +14,7 @@
     <HBox styleClass="page-header" alignment="CENTER_LEFT">
         <Label text="📊 Dashboard" styleClass="page-title"/>
         <Region HBox.hgrow="ALWAYS"/>
-        <Button fx:id="refreshBtn" text="🔄 Làm mới" onAction="#handleRefresh"
+        <Button fx:id="refreshBtn" text="🔄 Refresh" onAction="#handleRefresh"
                 styleClass="secondary-button"/>
     </HBox>
 
@@ -27,7 +27,7 @@
             <VBox fx:id="cardTotal" styleClass="stat-card, total" spacing="8" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER_LEFT" spacing="15">
                     <VBox spacing="5" HBox.hgrow="ALWAYS">
-                        <Label text="Tổng Khách Hàng" styleClass="stat-card-title"/>
+                        <Label text="Total Customers" styleClass="stat-card-title"/>
                         <Label fx:id="lblTotalCount" text="0" styleClass="stat-card-value"/>
                     </VBox>
                     <Label text="👥" styleClass="stat-card-icon"/>
@@ -38,7 +38,7 @@
             <VBox fx:id="cardVip" styleClass="stat-card, vip" spacing="8" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER_LEFT" spacing="15">
                     <VBox spacing="5" HBox.hgrow="ALWAYS">
-                        <Label text="Khách VIP" styleClass="stat-card-title"/>
+                        <Label text="VIP Customers" styleClass="stat-card-title"/>
                         <Label fx:id="lblVipCount" text="0" styleClass="stat-card-value"/>
                     </VBox>
                     <Label text="⭐" styleClass="stat-card-icon"/>
@@ -49,7 +49,7 @@
             <VBox fx:id="cardNew" styleClass="stat-card, new" spacing="8" HBox.hgrow="ALWAYS">
                 <HBox alignment="CENTER_LEFT" spacing="15">
                     <VBox spacing="5" HBox.hgrow="ALWAYS">
-                        <Label text="Mới Tháng Này" styleClass="stat-card-title"/>
+                        <Label text="New This Month" styleClass="stat-card-title"/>
                         <Label fx:id="lblNewCount" text="0" styleClass="stat-card-value"/>
                     </VBox>
                     <Label text="🆕" styleClass="stat-card-icon"/>
@@ -61,34 +61,34 @@
         <HBox spacing="20" VBox.vgrow="ALWAYS">
             <!-- Pie Chart -->
             <VBox styleClass="chart" spacing="15" HBox.hgrow="ALWAYS">
-                <Label text="Phân Loại Khách Hàng" styleClass="chart-title"/>
+                <Label text="Customer Classification" styleClass="chart-title"/>
                 <PieChart fx:id="typeDistributionChart" legendSide="BOTTOM"
                           VBox.vgrow="ALWAYS" animated="true"/>
             </VBox>
 
             <!-- Recent Customers or Additional Stats -->
             <VBox styleClass="chart" spacing="15" HBox.hgrow="ALWAYS">
-                <Label text="Thống Kê Chi Tiết" styleClass="chart-title"/>
+                <Label text="Detailed Statistics" styleClass="chart-title"/>
                 <VBox spacing="12" VBox.vgrow="ALWAYS">
                     <HBox alignment="CENTER_LEFT" spacing="10">
                         <Label text="🟣 VIP:" style="-fx-font-weight: bold;"/>
                         <Label fx:id="lblVipPercent" text="0%"/>
                         <Region HBox.hgrow="ALWAYS"/>
-                        <Label fx:id="lblVipDetail" text="0 khách"/>
+                        <Label fx:id="lblVipDetail" text="0 customers"/>
                     </HBox>
                     <Separator/>
                     <HBox alignment="CENTER_LEFT" spacing="10">
-                        <Label text="🔵 Thường:" style="-fx-font-weight: bold;"/>
+                        <Label text="🔵 Regular:" style="-fx-font-weight: bold;"/>
                         <Label fx:id="lblRegularPercent" text="0%"/>
                         <Region HBox.hgrow="ALWAYS"/>
-                        <Label fx:id="lblRegularDetail" text="0 khách"/>
+                        <Label fx:id="lblRegularDetail" text="0 customers"/>
                     </HBox>
                     <Separator/>
                     <HBox alignment="CENTER_LEFT" spacing="10">
-                        <Label text="🟢 Tiềm năng:" style="-fx-font-weight: bold;"/>
+                        <Label text="🟢 Potential:" style="-fx-font-weight: bold;"/>
                         <Label fx:id="lblPotentialPercent" text="0%"/>
                         <Region HBox.hgrow="ALWAYS"/>
-                        <Label fx:id="lblPotentialDetail" text="0 khách"/>
+                        <Label fx:id="lblPotentialDetail" text="0 customers"/>
                     </HBox>
                 </VBox>
             </VBox>

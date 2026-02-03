@@ -31,9 +31,9 @@ public class CustomerDAO {
             pstmt.setString(2, customer.getPhone());
             pstmt.setString(3, customer.getEmail());
             pstmt.setString(4, customer.getAddress());
-            pstmt.setString(5, customer.getDateOfBirth() != null ? customer.getDateOfBirth().toString() : null);
+            pstmt.setDate(5, customer.getDateOfBirth() != null ? Date.valueOf(customer.getDateOfBirth()) : null);
             pstmt.setString(6, customer.getCustomerType().name());
-            pstmt.setString(7, customer.getCreatedDate().toString());
+            pstmt.setTimestamp(7, customer.getCreatedDate() != null ? Timestamp.valueOf(customer.getCreatedDate()) : Timestamp.valueOf(LocalDateTime.now()));
 
             pstmt.executeUpdate();
 
@@ -88,7 +88,7 @@ public class CustomerDAO {
             pstmt.setString(2, customer.getPhone());
             pstmt.setString(3, customer.getEmail());
             pstmt.setString(4, customer.getAddress());
-            pstmt.setString(5, customer.getDateOfBirth() != null ? customer.getDateOfBirth().toString() : null);
+            pstmt.setDate(5, customer.getDateOfBirth() != null ? Date.valueOf(customer.getDateOfBirth()) : null);
             pstmt.setString(6, customer.getCustomerType().name());
             pstmt.setLong(7, customer.getId());
 
@@ -155,20 +155,13 @@ public class CustomerDAO {
         String email = rs.getString("email");
         String address = rs.getString("address");
 
-        String dobString = rs.getString("date_of_birth");
-        LocalDate dateOfBirth = dobString != null ? LocalDate.parse(dobString) : null;
+        Date sqlDob = rs.getDate("date_of_birth");
+        LocalDate dateOfBirth = sqlDob != null ? sqlDob.toLocalDate() : null;
 
         CustomerType customerType = CustomerType.valueOf(rs.getString("customer_type"));
 
-        String createdDateString = rs.getString("created_date");
-        // Handle both ISO format (with T) and database format (with space)
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime createdDate;
-        if (createdDateString.contains("T")) {
-            createdDate = LocalDateTime.parse(createdDateString);
-        } else {
-            createdDate = LocalDateTime.parse(createdDateString, formatter);
-        }
+        Timestamp sqlCreatedDate = rs.getTimestamp("created_date");
+        LocalDateTime createdDate = sqlCreatedDate != null ? sqlCreatedDate.toLocalDateTime() : null;
 
         return new Customer(id, fullName, phone, email, address, dateOfBirth, customerType, createdDate);
     }
@@ -219,8 +212,8 @@ public class CustomerDAO {
         String sql = "SELECT COUNT(*) as total FROM customers WHERE created_date >= ? AND created_date <= ?";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, startOfMonth.toString());
-            pstmt.setString(2, endOfMonth.toString());
+            pstmt.setTimestamp(1, Timestamp.valueOf(startOfMonth));
+            pstmt.setTimestamp(2, Timestamp.valueOf(endOfMonth));
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
