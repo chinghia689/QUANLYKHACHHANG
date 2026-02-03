@@ -84,11 +84,13 @@ public class DatabaseManager {
                     String trimmed = stmt.trim();
                     if (!trimmed.isEmpty() && !trimmed.startsWith("--")) {
                         try {
+                            System.out.println("Executing SQL: " + (trimmed.length() > 50 ? trimmed.substring(0, 50) + "..." : trimmed));
                             statement.execute(trimmed);
                         } catch (SQLException e) {
-                            // Ignore "database already exists" or "index already exists" errors
-                            if (!e.getMessage().contains("already exists")) {
-                                System.err.println("SQL Error: " + e.getMessage());
+                            // Ignore "database already exists" or "index already exists" or "table already exists" errors
+                            if (!e.getMessage().contains("already exists") && !e.getMessage().contains("Duplicate")) {
+                                System.err.println("SQL Error executing: " + trimmed);
+                                System.err.println("Error details: " + e.getMessage());
                             }
                         }
                     }

@@ -20,6 +20,7 @@ import javafx.scene.layout.StackPane;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 public class AccountController {
@@ -35,6 +36,21 @@ public class AccountController {
     @FXML private TableColumn<Account, Double> interestRateColumn;
     @FXML private TableColumn<Account, AccountStatus> statusColumn;
     @FXML private TableColumn<Account, LocalDateTime> createdDateColumn;
+
+    // Transaction UI Components
+    @FXML private Button depositButton;
+    @FXML private Button withdrawButton;
+    @FXML private Button transferButton;
+    @FXML private TabPane accountTabPane;
+    @FXML private Tab historyTab;
+    @FXML private TableView<com.customer.model.Transaction> historyTable;
+    @FXML private TableColumn<com.customer.model.Transaction, String> txnRefColumn;
+    @FXML private TableColumn<com.customer.model.Transaction, com.customer.model.TransactionType> txnTypeColumn;
+    @FXML private TableColumn<com.customer.model.Transaction, BigDecimal> txnAmountColumn;
+    @FXML private TableColumn<com.customer.model.Transaction, BigDecimal> txnBalanceAfterColumn;
+    @FXML private TableColumn<com.customer.model.Transaction, String> txnDescColumn;
+    @FXML private TableColumn<com.customer.model.Transaction, LocalDateTime> txnDateColumn;
+
     @FXML private Button openAccountButton;
     @FXML private Button viewDetailsButton;
     @FXML private Button freezeUnfreezeButton;
@@ -44,17 +60,21 @@ public class AccountController {
 
     private final AccountService accountService;
     private final CustomerService customerService;
+    private final com.customer.service.TransactionService transactionService;
     private final ObservableList<Account> accountList;
+    private final ObservableList<com.customer.model.Transaction> transactionList;
 
     public AccountController() {
         this.accountService = new AccountService();
         this.customerService = new CustomerService();
+        this.transactionService = new com.customer.service.TransactionService();
         this.accountList = FXCollections.observableArrayList();
+        this.transactionList = FXCollections.observableArrayList();
     }
 
     @FXML
     public void initialize() {
-        // Setup Columns
+        // Setup Account Columns
         accountNumberColumn.setCellValueFactory(new PropertyValueFactory<>("accountNumber"));
         customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("accountType"));
@@ -62,6 +82,58 @@ public class AccountController {
         interestRateColumn.setCellValueFactory(new PropertyValueFactory<>("interestRate"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         createdDateColumn.setCellValueFactory(new PropertyValueFactory<>("createdDate"));
+
+        // Setup Transaction Columns
+        if (historyTable != null) {
+            txnRefColumn.setCellValueFactory(new PropertyValueFactory<>("referenceNumber"));
+            txnTypeColumn.setCellValueFactory(new PropertyValueFactory<>("transactionType"));
+            txnAmountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+            txnBalanceAfterColumn.setCellValueFactory(new PropertyValueFactory<>("balanceAfter"));
+            txnDescColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+            txnDateColumn.setCellValueFactory(new PropertyValueFactory<>("createdDate"));
+
+            historyTable.setItems(transactionList);
+
+            // Format Transaction Amount
+            txnAmountColumn.setCellFactory(column -> new TableCell<>() {
+                @Override
+                protected void updateItem(BigDecimal item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        setText(String.format("%,.0f", item));
+                    }
+                }
+            });
+
+            // Format Balance After
+            txnBalanceAfterColumn.setCellFactory(column -> new TableCell<>() {
+                @Override
+                protected void updateItem(BigDecimal item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        setText(String.format("%,.0f", item));
+                    }
+                }
+            });
+
+            // Format Date
+            txnDateColumn.setCellFactory(column -> new TableCell<>() {
+                private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                @Override
+                protected void updateItem(LocalDateTime item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        setText(item.format(formatter));
+                    }
+                }
+            });
+        }
 
         // Format Balance
         balanceColumn.setCellFactory(column -> new TableCell<>() {
@@ -138,14 +210,66 @@ public class AccountController {
         typeFilter.setOnAction(e -> loadAccounts());
         statusFilter.setOnAction(e -> loadAccounts());
 
+        // Account selection listener to load history and enable/disable buttons
+        accountTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                loadTransactionHistory(newVal.getId());
+                boolean isActive = newVal.getStatus() == AccountStatus.ACTIVE;
+                if (depositButton != null) depositButton.setDisable(!isActive);
+                if (withdrawButton != null) withdrawButton.setDisable(!isActive);
+                if (transferButton != null) transferButton.setDisable(!isActive);
+            } else {
+                transactionList.clear();
+                if (depositButton != null) depositButton.setDisable(true);
+                if (withdrawButton != null) withdrawButton.setDisable(true);
+                if (transferButton != null) transferButton.setDisable(true);
+            }
+        });
+
         // Buttons
         AnimationHelper.addScaleOnHover(openAccountButton);
         AnimationHelper.addScaleOnHover(viewDetailsButton);
         AnimationHelper.addScaleOnHover(freezeUnfreezeButton);
         AnimationHelper.addScaleOnHover(closeAccountButton);
 
+        if (depositButton != null) {
+            depositButton.setDisable(true);
+            AnimationHelper.addScaleOnHover(depositButton);
+        }
+        if (withdrawButton != null) {
+            withdrawButton.setDisable(true);
+            AnimationHelper.addScaleOnHover(withdrawButton);
+        }
+        if (transferButton != null) {
+            transferButton.setDisable(true);
+            AnimationHelper.addScaleOnHover(transferButton);
+        }
+
         // Initial Load
         loadAccounts();
+    }
+
+    private void loadTransactionHistory(long accountId) {
+        if (historyTable == null) return;
+
+        Task<List<com.customer.model.Transaction>> task = new Task<>() {
+            @Override
+            protected List<com.customer.model.Transaction> call() throws Exception {
+                return transactionService.getTransactionHistory(accountId);
+            }
+
+            @Override
+            protected void succeeded() {
+                transactionList.clear();
+                transactionList.addAll(getValue());
+            }
+
+            @Override
+            protected void failed() {
+                showError("Lỗi", "Không thể tải lịch sử giao dịch: " + getException().getMessage());
+            }
+        };
+        new Thread(task).start();
     }
 
     private void loadAccounts() {
@@ -164,8 +288,23 @@ public class AccountController {
             @Override
             protected void succeeded() {
                 Platform.runLater(() -> {
+                    // Save selection
+                    Account selected = accountTable.getSelectionModel().getSelectedItem();
+                    long selectedId = selected != null ? selected.getId() : -1;
+
                     accountList.clear();
                     accountList.addAll(getValue());
+
+                    // Restore selection if possible
+                    if (selectedId != -1) {
+                        for (Account a : accountList) {
+                            if (a.getId() == selectedId) {
+                                accountTable.getSelectionModel().select(a);
+                                break;
+                            }
+                        }
+                    }
+
                     showLoading(false);
                 });
             }
@@ -181,6 +320,49 @@ public class AccountController {
 
         new Thread(task).start();
     }
+
+    @FXML
+    private void handleDeposit() {
+        Account selected = accountTable.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
+
+        com.customer.ui.DepositDialog dialog = new com.customer.ui.DepositDialog(selected);
+        dialog.showAndWait();
+
+        if (dialog.isSuccess()) {
+            loadAccounts(); // Refresh balance
+            loadTransactionHistory(selected.getId()); // Refresh history
+        }
+    }
+
+    @FXML
+    private void handleWithdraw() {
+        Account selected = accountTable.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
+
+        com.customer.ui.WithdrawDialog dialog = new com.customer.ui.WithdrawDialog(selected);
+        dialog.showAndWait();
+
+        if (dialog.isSuccess()) {
+            loadAccounts();
+            loadTransactionHistory(selected.getId());
+        }
+    }
+
+    @FXML
+    private void handleTransfer() {
+        Account selected = accountTable.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
+
+        com.customer.ui.TransferDialog dialog = new com.customer.ui.TransferDialog(selected);
+        dialog.showAndWait();
+
+        if (dialog.isSuccess()) {
+            loadAccounts();
+            loadTransactionHistory(selected.getId());
+        }
+    }
+
 
     @FXML
     private void handleOpenAccount() {

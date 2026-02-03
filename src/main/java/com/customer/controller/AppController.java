@@ -39,6 +39,12 @@ public class AppController {
     private HBox menuAccounts;
 
     @FXML
+    private HBox menuLoans;
+
+    @FXML
+    private HBox menuReports;
+
+    @FXML
     private HBox menuUsers;
 
     @FXML
@@ -107,6 +113,22 @@ public class AppController {
         if (currentSelectedMenu != menuAccounts) {
             selectMenuItem(menuAccounts);
             loadView("/views/account-view.fxml");
+        }
+    }
+
+    @FXML
+    private void handleMenuLoans() {
+        if (currentSelectedMenu != menuLoans) {
+            selectMenuItem(menuLoans);
+            loadView("/views/loan-view.fxml");
+        }
+    }
+
+    @FXML
+    private void handleMenuReports() {
+        if (currentSelectedMenu != menuReports) {
+            selectMenuItem(menuReports);
+            loadView("/views/report-view.fxml");
         }
     }
 

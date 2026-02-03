@@ -49,6 +49,20 @@
                     <Label text="Accounts"/>
                 </HBox>
 
+                <!-- Loans Menu Item -->
+                <HBox fx:id="menuLoans" styleClass="sidebar-item"
+                      onMouseClicked="#handleMenuLoans" alignment="CENTER_LEFT">
+                    <Label text="💰" styleClass="sidebar-icon"/>
+                    <Label text="Loans"/>
+                </HBox>
+
+                <!-- Reports Menu Item -->
+                <HBox fx:id="menuReports" styleClass="sidebar-item"
+                      onMouseClicked="#handleMenuReports" alignment="CENTER_LEFT">
+                    <Label text="📈" styleClass="sidebar-icon"/>
+                    <Label text="Reports"/>
+                </HBox>
+
                 <!-- Users Menu Item (Admin only) -->
                 <HBox fx:id="menuUsers" styleClass="sidebar-item"
                       onMouseClicked="#handleMenuUsers" alignment="CENTER_LEFT" visible="false" managed="false">

@@ -171,6 +171,19 @@ public class AccountDAO {
         }
     }
 
+    // Update with provided connection (for transactions)
+    public void update(Account account, Connection conn) throws SQLException {
+        String sql = "UPDATE accounts SET balance = ?, status = ?, closed_date = ? WHERE id = ?";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setBigDecimal(1, account.getBalance());
+            pstmt.setString(2, account.getStatus().name());
+            pstmt.setTimestamp(3, account.getClosedDate() != null ? Timestamp.valueOf(account.getClosedDate()) : null);
+            pstmt.setLong(4, account.getId());
+            pstmt.executeUpdate();
+        }
+    }
+
     // Search and Filter
     public List<Account> search(String keyword, AccountType type, AccountStatus status) throws SQLException {
         List<Account> accounts = new ArrayList<>();

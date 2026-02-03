@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox styleClass="content-area" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.customer.controller.LoanController"
+      stylesheets="@../styles/main.css">
+
+    <!-- Header -->
+    <HBox styleClass="page-header">
+        <Label text="💰 Quản lý Khoản vay" styleClass="page-title"/>
+    </HBox>
+
+    <!-- Toolbar -->
+    <HBox spacing="15" styleClass="toolbar">
+        <padding>
+            <Insets top="10" right="0" bottom="10" left="0"/>
+        </padding>
+        <TextField fx:id="searchField" promptText="Tìm theo mã khoản vay hoặc tên KH..." prefWidth="250"/>
+
+        <Label text="Trạng thái:" style="-fx-alignment: center-left;"/>
+        <ComboBox fx:id="statusFilter" prefWidth="130"/>
+
+        <Label text="Từ ngày:" style="-fx-alignment: center-left;"/>
+        <DatePicker fx:id="fromDatePicker" prefWidth="130"/>
+
+        <Label text="Đến ngày:" style="-fx-alignment: center-left;"/>
+        <DatePicker fx:id="toDatePicker" prefWidth="130"/>
+
+        <Region HBox.hgrow="ALWAYS"/>
+
+        <Button fx:id="newLoanButton" text="+ Tạo đơn vay" onAction="#handleNewLoan"
+                style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+        <Button fx:id="refreshButton" text="🔄" onAction="#handleRefresh"/>
+    </HBox>
+
+    <!-- Main content: Loan table -->
+    <VBox VBox.vgrow="ALWAYS" spacing="10">
+        <StackPane VBox.vgrow="ALWAYS">
+            <TableView fx:id="loanTable" VBox.vgrow="ALWAYS">
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+                <columns>
+                    <TableColumn fx:id="loanNumberColumn" text="Mã khoản vay" prefWidth="120"/>
+                    <TableColumn fx:id="customerNameColumn" text="Khách hàng" prefWidth="150"/>
+                    <TableColumn fx:id="principalAmountColumn" text="Số tiền vay" prefWidth="130" style="-fx-alignment: CENTER-RIGHT;"/>
+                    <TableColumn fx:id="termMonthsColumn" text="Kỳ hạn" prefWidth="80" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="monthlyPaymentColumn" text="Trả hàng tháng" prefWidth="130" style="-fx-alignment: CENTER-RIGHT;"/>
+                    <TableColumn fx:id="statusColumn" text="Trạng thái" prefWidth="120" style="-fx-alignment: CENTER;"/>
+                    <TableColumn fx:id="appliedDateColumn" text="Ngày nộp đơn" prefWidth="150" style="-fx-alignment: CENTER;"/>
+                </columns>
+            </TableView>
+
+            <!-- Loading overlay -->
+            <StackPane fx:id="loadingOverlay" styleClass="loading-overlay"
+                       visible="false" managed="false" style="-fx-background-color: rgba(255, 255, 255, 0.7);">
+                <ProgressIndicator maxWidth="50" maxHeight="50"/>
+            </StackPane>
+        </StackPane>
+
+        <!-- Action buttons -->
+        <HBox spacing="15" styleClass="toolbar">
+            <padding>
+                <Insets top="10" right="0" bottom="0" left="0"/>
+            </padding>
+            <Button fx:id="viewDetailButton" text="📋 Xem chi tiết" onAction="#handleViewDetail"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="approveButton" text="✅ Duyệt" onAction="#handleApprove"
+                    style="-fx-background-color: #27ae60; -fx-text-fill: white;"/>
+            <Button fx:id="rejectButton" text="❌ Từ chối" onAction="#handleReject"
+                    style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+            <Button fx:id="disburseButton" text="💵 Giải ngân" onAction="#handleDisburse"
+                    style="-fx-background-color: #f39c12; -fx-text-fill: white;"/>
+        </HBox>
+    </VBox>
+</VBox>

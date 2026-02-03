@@ -83,6 +83,8 @@ public class LoginController {
             ThemeManager.getInstance().applyTheme();
 
             stage.setScene(scene);
+            stage.setResizable(true); // Allow resizing
+            stage.setMaximized(true); // Maximize by default
             stage.centerOnScreen();
 
             // Update title to include username
