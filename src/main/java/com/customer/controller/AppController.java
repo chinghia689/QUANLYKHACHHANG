@@ -36,6 +36,9 @@ public class AppController {
     private HBox menuCustomers;
 
     @FXML
+    private HBox menuAccounts;
+
+    @FXML
     private HBox menuUsers;
 
     @FXML
@@ -96,6 +99,14 @@ public class AppController {
             // customer-view.fxml should map to MainController
             // We might need to rename MainController to CustomerController later for consistency
             loadView("/views/customer-view.fxml");
+        }
+    }
+
+    @FXML
+    private void handleMenuAccounts() {
+        if (currentSelectedMenu != menuAccounts) {
+            selectMenuItem(menuAccounts);
+            loadView("/views/account-view.fxml");
         }
     }
 
